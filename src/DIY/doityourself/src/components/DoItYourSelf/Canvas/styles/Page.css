@@ -1,0 +1,74 @@
+.Page_main_container {
+  /* width:400px;
+    height: 400px; */
+  /* box-shadow: 0 0 10px gray; */
+}
+
+/* ------------------------------- */
+.sizereferenceslink{
+position: absolute;
+width: 204px;
+height: 22px;
+left: 1100px;
+top: 31px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 800;
+font-size: 12px;
+line-height: 14px;
+text-align: center;
+text-decoration-line: underline;
+
+color: #0E4D8B;
+}
+.sizereferenceslink:hover{
+  cursor:pointer;
+}
+.flexible-modal {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #ccc;
+  background: white;
+}
+.flexible-modal-mask {
+  position: fixed;
+  height: 100px;
+  background: rgba(55, 55, 55, 1);
+  height: inherit;
+  width: inherit;
+}
+.flexible-modal-resizer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+  margin: 5px;
+  border-bottom: solid 2px #333;
+  border-right: solid 2px #333;
+}
+.flexible-modal-drag-area {
+  background: rgba(22, 22, 333, 0.2);
+  height: 50px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: move;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+.page {
+  background-color: whitesmoke;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.canvas {
+  height: 400px;
+  width: 400px;
+  border: solid black 1px;
+  background-color: white;
+}

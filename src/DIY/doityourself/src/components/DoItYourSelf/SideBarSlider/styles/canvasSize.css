@@ -1,0 +1,195 @@
+/* / */
+.canvas_size {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.canvas_size .category {
+  border-radius: 2px;
+  width: 90px;
+  margin: 3px;
+  height: 20px;
+  display: inline-block;
+  border: 0.5px solid #eaeaea;
+  background: #081a26;
+}
+
+.canvas_size .category p {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+  padding-top: 5px;
+  color: #eaeaea;
+}
+
+.canvas_size .designs {
+  text-align: left;
+  display: inline-block;
+  background: #d9d9d9;
+  opacity: 0.85;
+  width: 90px;
+  margin: 3px 0 0 6px;
+  height: 105px;
+}
+
+.canvas_size .heading {
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  padding: 13px 22px 0 5px !important;
+}
+
+.canvas_size .categories-div-panel,
+.recent-designs {
+  padding-left: 6px;
+}
+
+/* File uploader */
+.drag-drop {
+  border: 1px solid black;
+  width: 190px;
+  color: black;
+  height: 267px;
+  border: 0.5px solid #eaeaea;
+  border-radius: 2px;
+}
+
+.file-drop {
+  position: relative;
+  height: 100%;
+  color: #fff;
+  width: 100%;
+}
+
+.div_cat {
+  padding-left: 0 !important;
+}
+
+.file-drop>.file-drop-target {
+  /* basic styles */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 2px;
+
+  /* horizontally and vertically center all content */
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+
+  align-items: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+
+  justify-content: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+
+  align-content: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+
+  text-align: center;
+}
+
+.file-drop>.file-drop-target.file-drop-dragging-over-frame {
+  /* overlay a black mask when dragging over the frame */
+  border: none;
+  background-color: rgba(0, 0, 0, 0.65);
+  box-shadow: none;
+  z-index: 50;
+  opacity: 1;
+
+  /* typography */
+  color: white;
+}
+
+.file-drop>.file-drop-target.file-drop-dragging-over-target {
+  /* turn stuff orange when we are dragging over the target */
+  color: #ff6e40;
+  box-shadow: 0 0 13px 3px #ff6e40;
+}
+
+/* ------------------------------------------------------------------------------ */
+
+.size-item {
+  border: solid 1px white;
+  text-align: center;
+  font-size: small;
+  padding: 2px 0px;
+  border-radius: 2px;
+}
+
+.custom-dimension {
+  display: flex;
+  justify-content: space-around;
+  border: dashed 2px white;
+  padding: 10px 0px;
+}
+
+.custom-dimension select {
+  background-color: transparent;
+  border: solid white 1px;
+  border-radius: 2px;
+  color: white;
+}
+
+.custom-dimension select option {
+  color: black;
+}
+
+/* // editable select classes :  */
+
+.canva-select-editable {
+  position: relative;
+  background-color: white;
+  width: 24px;
+  height: 22px;
+  margin-left: 5px;
+}
+
+.canva-select-editable select {
+  position: absolute;
+  top: -2px;
+  left: -5px;
+}
+
+.canva-select-editable input {
+  position: absolute;
+  top: 1px;
+  left: -4px;
+  margin-left: 0px;
+  color: white;
+  width: 23px;
+  padding: 1px;
+  font-size: 15px;
+  border: none;
+  background: transparent;
+}
+
+.canva-select-editable input:focus {
+  outline: none;
+  top: -3px;
+  left: -5px;
+}

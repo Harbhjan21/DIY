@@ -1,0 +1,54 @@
+.landscape {
+    width: 320px;
+    height: 306px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    flex-direction: column;
+    background: #f1f1f1;
+    margin: 12px 2px;
+    border-radius: 20px;
+  }
+  .landscape:hover {
+    margin: 10px 0px;
+    border: 2px solid black;
+  }
+  .landscape .pictograms {
+    width: 306px;
+    height: 190px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 10px;
+  }
+  .landscapne-title-box {
+    width: 304px;
+    height: 61px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: #00e0ff;
+    border: 1px solid #000000;
+    border-radius: 10px;
+  }
+  .pictogram-content {
+    display: flex;
+    height: 127px;
+    /* height: 67%; */
+  
+    align-items: center;
+    justify-content: center;
+  }
+  .pictogram-content .pictogram-img-box {
+    height: 127px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 112px;
+    background: #ffffff;
+    border-right: 1px solid #000000;
+    border-radius: 10px 0px 0px 10px;
+  }
+  .landscape .description {
+    width: 100%;
+    margin-left: 15px;
+  }

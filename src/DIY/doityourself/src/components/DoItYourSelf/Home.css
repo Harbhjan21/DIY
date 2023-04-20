@@ -1,0 +1,46 @@
+.home_container {
+  display: flex;
+  flex-direction: row;
+}
+/* ------------------------------------------------------------------ */
+
+.diy-canvas-home {
+  height: 91.5vh;
+  overflow: hidden;
+  display: flex;
+}
+.diy-home-left {
+  height: 100%;
+  width: 85px;
+}
+.diy-home-right {
+  height: 100%;
+  width: calc(100vw - 85px);
+  position: relative;
+}
+.editor-box {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: inherit;
+}
+.diy-right-bottom {
+  margin-top: 50px;
+  height: calc(90vh - 50px);
+  width: inherit;
+  display: flex;
+  position: relative;
+}
+.diy-right-panel-box {
+  height:91.8vh;
+  width: 200px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.diy-main-area {
+ 
+  height:85vh;
+}

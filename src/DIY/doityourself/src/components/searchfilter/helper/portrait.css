@@ -1,0 +1,96 @@
+.portrait {
+  width: 139px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* padding-top: 10px;
+  background: #f1f1f1; */
+  margin: 10px 15px;
+  transform: scale(1);
+  opacity: 1;
+  transition: all 150ms ease-in-out;
+}
+.landscape{
+  margin-top:50px;
+  object-fit: fill;
+}
+.potrait{
+  object-fit:fill;
+}
+.portrait:hover {
+  transform: scale(1.15);
+ 
+  z-index: 10;
+  cursor: pointer;
+}
+.portrait .pictogram {
+  width: 139px;
+  height: 180px;
+  /* margin-top: 20px; */
+
+  background: #fff;
+  /* border: 1px solid #000000; */
+  border-radius: 15px;
+}
+.pictogram-title-box {
+  border-radius: 15px 15px 0 0;
+  background: #00e0ff;
+  border-bottom: 1px solid #000000;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pic-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.portrait .pictogram-img-box {
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #000000;
+}
+.pictogram-desc-box {
+  height: 100px;
+}
+.description p {
+  width: 233.87px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  text-align: left;
+  line-height: 29px;
+  color: #000000;
+}
+.btm-title {
+  /* width: 202px; */
+
+  font-family: "Verdana";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  margin: 0;
+  padding: 5px 10px;
+  color: #003459;
+}
+.btm-desc {
+  margin: 0;
+  padding: 5px 10px;
+  font-family: "Verdana";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+
+  color: rgba(0, 52, 89, 0.89);
+}

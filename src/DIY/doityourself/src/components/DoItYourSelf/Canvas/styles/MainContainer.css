@@ -1,0 +1,9 @@
+.main_container {
+  height: calc(90vh - 50px);
+  width: 100%;
+  margin-left: 380px;
+  display: flex;
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+}

@@ -1,0 +1,151 @@
+.editor {
+  position: fixed;
+  width: 79.1vw;
+  /* width: 95vw; */
+  right: 0;
+  height: 50px;
+  background: rgb(0, 52, 89);
+  background: white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  color: #000;
+  /* transition: all 2s ease-in-out; */
+  font-size: 14px;
+}
+.mx-width {
+  width: 94.5vw;
+}
+
+.editor-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #fff;
+}
+.icon-div {
+  padding: 0px;
+  position: relative;
+  color: black;
+}
+.tooltip {
+  position: absolute;
+  top: 25px;
+  visibility: hidden;
+  font-size: 15px;
+  /* width: 60px; */
+  color: #fff;
+  background-color: blue;
+  background-color: rgb(69, 68, 68);
+  left: -15px;
+  z-index: 10;
+  padding: 0px 5px 3px 5px;
+  width: max-content;
+}
+.icon-div:hover .tooltip {
+  transition-delay: 1s;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 10px;
+}
+.back-forward {
+  width: 70px;
+}
+.editor .icon {
+  font-size: 1.5rem;
+}
+.editor .flex {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+  align-items: center;
+}
+.editor .landscape-pic {
+  /* -webkit-transform: scaleX(-1); */
+  transform: rotate(90deg);
+}
+.triangle {
+  position: absolute;
+  top: 20px;
+  left: 5px;
+  background-color: #fff;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  padding: 0;
+  border-bottom: 10px solid rgb(69, 68, 68);
+}
+/* -----------------------Font ------------------------ */
+
+/* ===================font family ================= */
+.font-family-tool div[id^="font-picker"] {
+  background: #ffffff !important;
+  border: 1px solid #003459;
+  border-radius: 25px;
+  /* Side Bar text color */
+  height: 24px;
+  width: 150px;
+  border: 1px solid #afafaf;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+  border-radius: 2px;
+}
+.font-family-tool div[id^="font-picker"] .dropdown-button {
+  /* padding: 0 20px !important; */
+  /* margin-top: 8.5px !important; */
+  background: transparent !important;
+  height: 24px !important;
+}
+
+.font-family-tool div[id^="font-picker"] .dropdown-button:hover,
+.font-family-tool div[id^="font-picker"] .dropdown-button:focus {
+  background: transparent !important;
+}
+/* -----------------------Font ------------------------ */
+.d-tools select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 0px;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  margin-left: 1rem;
+  border: 1px solid #afafaf;
+  box-shadow: 0px 2px 2px rgb(0 0 0 / 25%);
+  border-radius: 2px;
+  outline: none;
+  height: 26px;
+  padding-right: 2rem;
+  padding: 0 12px;
+}
+
+.editor-child .css-i4bv87-MuiSvgIcon-root {
+  width: 28px !important;
+  /* height: 35px !important; */
+}
+.hex-code {
+  border: 1px solid #afafaf;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  /* padding-top: 7px; */
+  width: 60px;
+  box-sizing: border-box;
+  height: 24px;
+  padding: 2px;
+}
+.shape-tools img {
+  width: 20px;
+  margin-top: 10px;
+  height: 20px;
+}
+.shape-tools figure {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  border: 1px solid #afafaf;
+  border-radius: 2px;
+}

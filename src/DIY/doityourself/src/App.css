@@ -1,0 +1,16 @@
+/* .App {
+  text-align: center;
+} */
+.frame {
+  background-color: pink;
+  width: 400px;
+  height: 400px;
+}
+.frame:hover {
+  background-color: blue;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  z-index: 20;
+}
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");

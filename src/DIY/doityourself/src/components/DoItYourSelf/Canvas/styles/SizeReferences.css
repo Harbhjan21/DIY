@@ -1,0 +1,147 @@
+.description{
+    list-style-type: disc;
+    font-family: 'Segoe UI';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+
+/* Dimension selected color */
+position:absolute;
+color: #505050;
+}
+.modal-content{
+    border:none;
+}
+.sameBox{
+    text-align: center;
+    font-family: 'Segoe UI';
+font-style: normal;
+font-weight: 700;
+font-size: 8px;
+line-height: 11px;
+
+/* Primary */
+
+color: #003459;
+
+
+
+}
+.sameBox2{
+    font-family: 'Segoe UI';
+font-style: normal;
+font-weight: 700;
+font-size: 10px;
+line-height: 13px;
+text-align: center;
+color: #000000;
+}
+.firstsize{
+   
+width: 53.47px;
+height: 53.47px;
+
+background-color:#C1C5C9;
+padding-top:20px;
+}
+.secondsize{
+    height: 73.51969909667969px;
+width: 49.458709716796875px;
+left: 0px;
+top: 0px;
+background-color:#C1C5C9;
+padding-top:30px;
+}
+.thirdsize{
+    height: 82.60216522216797px;
+width: 58.40556716918945px;
+left: 0px;
+top: 0px;
+padding-top:35px;
+background-color:#C1C5C9;
+}
+.fourthsize{
+    height: 82.87675476074219px;
+width: 64.16265106201172px;
+left: 0px;
+top: 0px;
+background-color: #C1C5C9;
+padding-top:35px;
+}
+.fifthsize{
+    height: 96.04901885986328px;
+width: 64.03267669677734px;
+left: 0px;
+top: 0px;
+padding-top:40px;
+background-color:#C1C5C9;
+}
+.sixthsize{
+    height: 166.37796020507812px;
+    width: 117.68197631835938px;
+    left: 0px;
+    top: 0px;
+    background-color:#C1C5C9;
+    padding-top:75px;
+}
+.seventhsize{
+    height: 116.34661102294922px;
+width: 82.1697998046875px;
+left: 0px;
+top: 0px;
+padding-top:50px;
+background-color:#C1C5C9;
+}
+.eighthsize{
+    height: 82.87675476074219px;
+width: 82.87675476074219px;
+left:0px;
+top: 0px;
+background-color:#C1C5C9;
+padding-top:35px;
+}
+
+.ninthsize{
+    height: 28.333337783813477px;
+width: 28.333337783813477px;
+background-color:#C1C5C9;
+padding-top:7px;
+
+}
+.tenthsize{
+    height: 41.66667175292969px;
+width: 41.66667175292969px;
+background-color:#C1C5C9;
+padding-top:13px;
+}
+.eleventhsize{
+    height: 70.00001525878906px;
+width: 70.00001525878906px;
+background-color:#C1C5C9;
+padding-top:30px;
+}
+.twelvethsize{
+    height: 83.33334350585938px;
+    width: 58.333343505859375px;
+    background-color:#C1C5C9;
+    padding-top:35px;
+}
+.thirteenthsize{
+    height: 83.33334350585938px;
+width: 83.33334350585938px;
+background-color:#C1C5C9;
+padding-top:35px;
+}
+.fourteenthsize{
+    height: 100.00000762939453px;
+width: 100.00000762939453px;
+background-color:#C1C5C9;
+padding-top:45px;
+}
+.fifteenthsize{
+    height: 116.66668701171875px;
+width: 83px;
+background-color:#C1C5C9;
+padding-top:50px;
+}

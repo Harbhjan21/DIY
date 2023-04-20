@@ -1,0 +1,21 @@
+const utilityStickersCategories= [
+    "Travel",
+    "Music",
+    "Festivals",
+    "Culture",
+    "Religion",
+    "Animals",
+    "Arrow",
+    "Banking",
+    "Social Media",
+    "Architecture",
+    "Science",
+    "Thoughts",
+    "Relationship",
+    "Marketing",
+    "Symbols",
+    "Sports",
+    "Calender",
+    "Spiritual",
+  ];
+  export default utilityStickersCategories;

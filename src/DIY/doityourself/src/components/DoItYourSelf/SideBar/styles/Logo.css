@@ -1,0 +1,36 @@
+.logo_container {
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: hwb(0 100% 0% / 0.977);
+  width: 98%;
+  /* height: 92.5px; */
+  height: 13vh;
+
+
+  background: #ffffff;
+  /* border: 1px solid rgba(255, 255, 255, 0.25); */
+  /* border-radius: 10px; */
+  background-color: #003459;
+}
+.logo_container .icon {
+  font-size: 30px;
+  color: #fff;
+}
+.logo_container p {
+  font-weight: 400;
+  font-size: 10px;
+  color: #ffffff;
+}
+
+.logo_container:hover,
+.active {
+  /* background-color: #fff; */
+}
+.logo_container:hover .icon,
+.logo_container:hover p {
+  color: #003459;
+}
+
