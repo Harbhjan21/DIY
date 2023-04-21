@@ -56,7 +56,8 @@ const TextDisplayer = React.forwardRef(
 
     function onDragStop(e, d, indexs) {
       const { x, y } = d;
-
+      console.log(x);
+      console.log(y);
       pageContent.current[pageIndex].texts[index].x = x;
       pageContent.current[pageIndex].texts[index].y = y;
     }

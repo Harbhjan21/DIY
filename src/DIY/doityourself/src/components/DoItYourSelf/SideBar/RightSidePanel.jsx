@@ -19,21 +19,30 @@ export default function RightSidePanel() {
   return (
     <div class="right-panel">
       <form>
-        <input type="number" placeholder="Width" />
-        <input type="number" placeholder="Height" />
-        <input type="number" placeholder="Marginx" />
-        <input type="number" placeholder="Marginy" />
+        <h3>For Text</h3>
+        <input type="text" placeholder="Width" />
+        <input type="text" placeholder="Height" />
+        <input type="text" placeholder="Marginx" />
+        <input type="text" placeholder="Marginy" />
         <input type="text" placeholder="fontSize" />
         <input type="text" placeholder="fontFamily" />
-        <button type="submit">Submit</button>
+        <br />
+        <button class="finish-text" type="submit">
+          Submit
+        </button>
       </form>
       <form>
-        <input type="number" placeholder="Width" />
-        <input type="number" placeholder="Height" />
-        <input type="number" placeholder="Marginx" />
-        <input type="number" placeholder="Marginy" />
-        <button type="submit">Submit</button>
+        <h3>For logo</h3>
+        <input type="text" placeholder="Width" />
+        <input type="text" placeholder="Height" />
+        <input type="text" placeholder="Marginx" />
+        <input type="text" placeholder="Marginy" />
+        <br />
+        <button class="finish-logo" type="submit">
+          Submit
+        </button>
       </form>
+      <button class="finish-template">Finish Template</button>
     </div>
     // <div className="right-sidebar">
     //   {data

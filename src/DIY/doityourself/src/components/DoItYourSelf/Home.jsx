@@ -63,9 +63,9 @@ const Home = () => {
               setPagesHistory={setPagesHistory}
             />
           </div>
-          {/* <div className="diy-right-panel-box">
+          <div className="diy-right-panel-box">
             <RightSidePanel />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
