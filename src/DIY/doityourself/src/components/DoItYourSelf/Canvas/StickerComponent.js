@@ -33,6 +33,13 @@ export default function StickerComponent({
   function onResize(event, direction, ref, delta, indexs) {
     const { width, height, x, y, backgroundColor } = ref.style;
     console.log(width, " x ", height);
+    // dispatch({
+    //   type: "SET_LOGO_DIMENSIONS",
+    //   payload: {
+    //     width:width,
+    //     height:height,
+    //   },
+    // });
     pageContent.current[pageIndex].shapes[index].height = height;
     pageContent.current[pageIndex].shapes[index].width = width;
     //pageContent.current[pageIndex].shapes[index].x = x;
@@ -45,6 +52,16 @@ export default function StickerComponent({
     // console.log(
     //   pageContent.current[pageIndex].logos.filter((x) => x?.category)
     // );
+    dispatch({
+      type: "SET_DIY_FORM_LOGO",
+      payload: {
+        x: x,
+        y: y,
+        width: pageContent.current[pageIndex].shapes[index].width ,
+        height:pageContent.current[pageIndex].shapes[index].height,
+      },
+    });
+  
     pageContent.current[pageIndex].shapes[index].x = x;
     pageContent.current[pageIndex].shapes[index].y = y;
   }

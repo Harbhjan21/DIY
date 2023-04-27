@@ -28,8 +28,7 @@ const ColorPalette = ({
           width: "25px",
           borderRadius: "50%",
           margin: "0px 5px",
-          backgroundColor:
-            data[editor.activePage].texts[editor.activeElementIndex].color,
+          backgroundColor: { newColor },
         }}
         onClick={() => {
           setShowColorBox(!showColorBox);

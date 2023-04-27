@@ -6,7 +6,7 @@ const FontWeight = () => {
   const editor = useSelector((state) => state.projects.editor);
 
   const data = useSelector((state) => state.projects.pages);
-  console.log(data);
+  console.log(editor);
 
   const isBold =
     data[editor.activePage].texts[editor.activeElementIndex].isBold;
@@ -14,6 +14,7 @@ const FontWeight = () => {
     data[editor.activePage].texts[editor.activeElementIndex].isItalic;
   const isUnderline =
     data[editor.activePage].texts[editor.activeElementIndex].underline;
+
   return (
     <div style={{ display: "flex", alignItems: "center", margin: "0px 10px" }}>
       {isBold && (
@@ -37,6 +38,12 @@ const FontWeight = () => {
                 pageIndex: editor.activePage,
                 elementIndex: editor.activeElementIndex,
                 bold: false,
+              },
+            });
+            dispatch({
+              type: "SET_DIY_FORM_ISBOLD",
+              payload: {
+                isBold: isBold,
               },
             });
           }}
@@ -67,6 +74,12 @@ const FontWeight = () => {
                 bold: true,
               },
             });
+            dispatch({
+              type: "SET_DIY_FORM_ISBOLD",
+              payload: {
+                isBold: isBold,
+              },
+            });
           }}
         >
           B
@@ -93,6 +106,12 @@ const FontWeight = () => {
                 pageIndex: editor.activePage,
                 elementIndex: editor.activeElementIndex,
                 italics: false,
+              },
+            });
+            dispatch({
+              type: "SET_DIY_FORM_ISITALIC",
+              payload: {
+                isItalic: isItalic,
               },
             });
           }}
@@ -123,6 +142,12 @@ const FontWeight = () => {
                 italics: true,
               },
             });
+            dispatch({
+              type: "SET_DIY_FORM_ISITALIC",
+              payload: {
+                isItalic: isItalic,
+              },
+            });
           }}
         >
           I
@@ -151,6 +176,12 @@ const FontWeight = () => {
                 underline: false,
               },
             });
+            dispatch({
+              type: "SET_DIY_FORM_UNDERLINE",
+              payload: {
+                underLine: isUnderline,
+              },
+            });
           }}
         >
           U
@@ -177,6 +208,12 @@ const FontWeight = () => {
                 pageIndex: editor.activePage,
                 elementIndex: editor.activeElementIndex,
                 underline: true,
+              },
+            });
+            dispatch({
+              type: "SET_DIY_FORM_UNDERLINE",
+              payload: {
+                underLine: isUnderline,
               },
             });
           }}

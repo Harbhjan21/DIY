@@ -14,7 +14,9 @@ const FontComponent = ({ finalFont, setFinalFont }) => {
         //   data[editor.activePage].texts[editor.activeElementIndex].family ||
         //   "roboto"
         // }
-        activeFontFamily="Open Sans"
+        activeFontFamily={
+          data[editor.activePage].texts[editor.activeElementIndex].family
+        }
         limit={200}
         style={{
           height: "25px",
@@ -26,6 +28,12 @@ const FontComponent = ({ finalFont, setFinalFont }) => {
               pageIndex: editor.activePage,
               elementIndex: editor.activeElementIndex,
               family: nextFont.family,
+            },
+          });
+          dispatch({
+            type: "SET_DIY_FORM_FONT_FAMILY",
+            payload: {
+              fontFamily: nextFont.family,
             },
           });
         }}

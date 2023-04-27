@@ -5,6 +5,7 @@ import  { handleUser } from "./userReducer";
 import handleProduct from "./productReducer";
 import handleItem from "./categoryReducer";
 import handleDIY from "./rootDIY";
+
 const rootReducer = combineReducers({
     cart: handleCart,
     poster:handlePoster,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     product: handleProduct,
     category:handleItem,
     projects: handleDIY 
+
 })
 
 export default rootReducer

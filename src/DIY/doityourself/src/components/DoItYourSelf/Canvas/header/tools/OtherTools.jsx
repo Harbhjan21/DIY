@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Icon from "../helper/Icon";
 import {
   twoDocs,
@@ -120,7 +120,11 @@ const OtherTools = () => {
               dispatch(deletePage());
             }}
           >
-            <Icon img={deletePic} desc="Delete" />
+            <Icon
+              img={deletePic}
+              desc="Delete"
+              onClick={() => console.log("deleteclicked")}
+            />
           </div>
           <Icon img={position} desc="Position" />
           <Icon img={download} desc="Download" />
@@ -170,7 +174,11 @@ const OtherTools = () => {
             dispatch(deletePage());
           }}
         >
-          <Icon img={deletePic} desc="Delete" />
+          <Icon
+            img={deletePic}
+            desc="Delete"
+            onClick={() => console.log("deleteclicked")}
+          />
         </div>
         <Icon img={position} desc="Position" />
         <Icon img={download} desc="Download" />

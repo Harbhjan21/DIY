@@ -79,6 +79,15 @@ export default function UploadImg({
 
   function onDragStop(e, d, indexs) {
     const { x, y } = d;
+    dispatch({
+      type: "SET_DIY_FORM_LOGO",
+      payload: {
+        x: x,
+        y: y,
+        width: pageContent.current[pageIndex].shapes[index].width ,
+        height:pageContent.current[pageIndex].shapes[index].height,
+      },
+    });
     pageContent.current[pageIndex].images[index].x = x;
     pageContent.current[pageIndex].images[index].y = y;
   }

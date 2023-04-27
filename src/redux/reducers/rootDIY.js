@@ -5,6 +5,8 @@ import handleCommons from "./handleCommons";
 import handleFilter from "./handlerFilter";
 import sideSlider from "./openSlider";
 import editor from "./editorReducer";
+import text from "./textReducer";
+import logoForm from "./logoReducer";
 const handleDIY = combineReducers({
   pages: handlePage,
   currentPage: handleConfiguration,
@@ -12,6 +14,8 @@ const handleDIY = combineReducers({
   filter: handleFilter,
   sideSlider: sideSlider,
   editor: editor,
+  text:text,
+  logo:logoForm
 });
 
 export default handleDIY;

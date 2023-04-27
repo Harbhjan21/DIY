@@ -1,14 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import "./rightPanel.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Rnd } from "react-rnd";
-
+import axios from "axios";
+import { API } from "../../../../../../backend";
 export default function RightSidePanel() {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => {
-    return state.projects.pages;
-  });
+  const textForm = useSelector((state) => state.projects.text);
+  const logoForm = useSelector((state) => state.projects.logo);
+  // const editor = useSelector((state) => state.projects.editor);
+  // const data = useSelector((state) => state.projects.pages);
 
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setTextFormData((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
+  const handleTextSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .post(`${API}diy/uploadTextStyle`, textForm)
+      .then((response) => {
+        console.log(response);
+        // handle success response here
+      })
+      .catch((error) => {
+        console.error(error);
+        // handle error response here
+      });
+  };
+  const handleLogoSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .post(`${API}diy/uploadLogo`, logoForm)
+      .then((response) => {
+        console.log(response);
+        // handle success response here
+      })
+      .catch((error) => {
+        console.error(error);
+        // handle error response here
+      });
+  };
   function getNumber(str) {
     let a = typeof str === "string" ? str.split("p") : str;
     if (typeof a === "number") return a;
@@ -18,25 +54,87 @@ export default function RightSidePanel() {
 
   return (
     <div class="right-panel">
-      <form>
+      <form onSubmit={handleTextSubmit}>
         <h3>For Text</h3>
-        <input type="text" placeholder="Width" />
-        <input type="text" placeholder="Height" />
-        <input type="text" placeholder="Marginx" />
-        <input type="text" placeholder="Marginy" />
-        <input type="text" placeholder="fontSize" />
-        <input type="text" placeholder="fontFamily" />
+        {/* <input type="text" placeholder="Width" />
+        <input type="text" placeholder="Height" /> */}
+        <input
+          value={textForm.x}
+          type="text"
+          name="x"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.y}
+          type="text"
+          name="y"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.fontSize}
+          type="text"
+          name="fontSize"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.fontFamily}
+          type="text"
+          name="fontFamily"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.isBold}
+          type="text"
+          name="isBold"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.isItalic}
+          type="text"
+          name="isItalic"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.underLine}
+          type="text"
+          name="underLine"
+          // onChange={handleInputChange}
+        />
+        {/* <input
+          value={textForm.color}
+          type="text"
+          name="color"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.text}
+          type="text"
+          name="text"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.lineSpacing}
+          type="text"
+          name="lineSpacing"
+          // onChange={handleInputChange}
+        />
+        <input
+          value={textForm.letterSpacing}
+          type="text"
+          name="letterSpacing"
+          // onChange={handleInputChange} */}
+        {/* //  /> */}
         <br />
         <button class="finish-text" type="submit">
           Submit
         </button>
       </form>
-      <form>
+      <form onSubmit={handleLogoSubmit}>
         <h3>For logo</h3>
-        <input type="text" placeholder="Width" />
-        <input type="text" placeholder="Height" />
-        <input type="text" placeholder="Marginx" />
-        <input type="text" placeholder="Marginy" />
+        <input value={logoForm.width} type="text" placeholder="Width" />
+        <input value={logoForm.height} type="text" placeholder="Height" />
+        <input value={logoForm.x} type="text" placeholder="Marginx" />
+        <input value={logoForm.y} type="text" placeholder="Marginy" />
         <br />
         <button class="finish-logo" type="submit">
           Submit

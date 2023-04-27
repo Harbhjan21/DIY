@@ -19,6 +19,12 @@ const FontSize = ({ finalFontSize, setFinalFontSize }) => {
             elementIndex: editor.activeElementIndex,
           },
         });
+        dispatch({
+          type: "SET_DIY_FORM_FONT_SIZE",
+          payload: {
+            fontSize: e.target.value,
+          },
+        });
       }}
       style={{
         margin: "0px 4px",

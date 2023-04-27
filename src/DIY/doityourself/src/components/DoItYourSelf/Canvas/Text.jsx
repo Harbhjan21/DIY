@@ -56,8 +56,13 @@ const TextDisplayer = React.forwardRef(
 
     function onDragStop(e, d, indexs) {
       const { x, y } = d;
-      console.log(x);
-      console.log(y);
+      dispatch({
+        type: "SET_DIY_FORM_TEXT_MARGIN",
+        payload: {
+          x: x,
+          y: y,
+        },
+      });
       pageContent.current[pageIndex].texts[index].x = x;
       pageContent.current[pageIndex].texts[index].y = y;
     }
