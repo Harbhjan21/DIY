@@ -1,8 +1,7 @@
 const canvasDimension = JSON.parse(window.localStorage.getItem("canvasDimension")) ? JSON.parse(window.localStorage.getItem("canvasDimension")) : {width : 400 , height : 400};
 const valueX = Math.floor(canvasDimension.width / 2) - 100; 
 const valueY = Math.floor(canvasDimension.height / 2) - 100; 
-console.log("ValueX and ValueY ===> ", valueX , valueY)
-
+// console.log("ValueX and ValueY ===> ", valueX , valueY)
 const frames = [
   {
     category: "sticker",
@@ -13,6 +12,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -24,6 +24,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -34,6 +35,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -44,6 +46,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -54,6 +57,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -64,6 +68,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -74,6 +79,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -84,6 +90,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -95,6 +102,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -106,6 +114,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -117,6 +126,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -128,6 +138,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -139,6 +150,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -149,6 +161,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -159,6 +172,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -169,6 +183,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -179,6 +194,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -189,6 +205,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -199,6 +216,8 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
+
   },
   {
     category: "sticker",
@@ -209,6 +228,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -219,6 +239,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -229,6 +250,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -239,6 +261,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -249,6 +272,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -260,6 +284,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -271,6 +296,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -282,6 +308,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -293,6 +320,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -304,6 +332,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -315,6 +344,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -325,6 +355,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -335,6 +366,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -345,6 +377,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -356,6 +389,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -367,6 +401,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -378,6 +413,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -389,6 +425,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -400,6 +437,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -411,6 +449,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -422,6 +461,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
   {
     category: "sticker",
@@ -432,6 +472,7 @@ const frames = [
     x: `${valueX}`,
     y: `${valueY}`,
     background: "whitesmoke",
+    zIndex:0
   },
 
   // //hexagon

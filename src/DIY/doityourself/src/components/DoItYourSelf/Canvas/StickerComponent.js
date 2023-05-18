@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect,useState } from "react";
 import { Rnd } from "react-rnd";
 import HeaderPage from "./header/HeaderPage";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-
+import { useSelector,useDispatch } from "react-redux";
+// import { Flag } from "@mui/icons-material";
+let flag=false;  // to change color and focus
 const StyledRnd = styled(Rnd)`
   &:hover {
     border: 1px solid blue;
@@ -23,7 +24,7 @@ export default function StickerComponent({
   pageIndex,
 }) {
   const dispatch = useDispatch();
-
+  const val = useSelector((state)=>state.Zindex);
   useEffect(() => {
     console.log("shape-------------------- ", element);
   }, []);
@@ -32,7 +33,7 @@ export default function StickerComponent({
 
   function onResize(event, direction, ref, delta, indexs) {
     const { width, height, x, y, backgroundColor } = ref.style;
-    console.log(width, " x ", height);
+    // console.log(width, " x ", height);
     // dispatch({
     //   type: "SET_LOGO_DIMENSIONS",
     //   payload: {
@@ -47,11 +48,13 @@ export default function StickerComponent({
   }
  
   function onDragStop(e, d, indexs) {
+    flag=true;  
     const { x, y } = d;
     // console.log(d);
     // console.log(
     //   pageContent.current[pageIndex].logos.filter((x) => x?.category)
     // );
+    // element.zIndex=val; //shape tools ke inc and dcr
     dispatch({
       type: "SET_DIY_FORM_LOGO",
       payload: {
@@ -73,6 +76,20 @@ export default function StickerComponent({
     let num = Number(a[0]);
     return num;
   }
+  const focusHandeller = ()=>{// object focus event to resolve color problem
+    if(flag){
+      flag=false;
+      dispatch({
+        type: "SET_ACTIVE_TOOL",
+        payload: {
+          activeTool: "Shapes-Tools",
+          activePage: pageIndex,
+          activeElementType: "shapes",
+          activeElementIndex: index,
+        },
+      });
+    }
+    }
   return (
     <>
       {/* {activeTool === "Shapes-Tools" && ActiveIndex == index ? (
@@ -84,6 +101,7 @@ export default function StickerComponent({
         />
       ) : null} */}
       <StyledRnd
+        style={{zIndex:element.zIndex}}
         className="d-flex"
         default={{
           x: getNumber(element.x),
@@ -99,9 +117,9 @@ export default function StickerComponent({
           event.stopPropagation();
         }}
         // onClick={() => {
-        //   // let str = "Shapes-Tools";
-        //   // setActiveTool(str);
-        //   // setActiveIndex(`${index}`);
+        //   let str = "Shapes-Tools";
+        //   setActiveTool(str);
+        //   setActiveIndex(`${index}`);
         //   dispatch({
         //     type: "SET_ACTIVE_TOOL",
         //     payload: { activeTool: "Shapes-Tools" },
@@ -116,20 +134,10 @@ export default function StickerComponent({
             height: "inherit",
             width: "inherit",
             x:"inherit",
-            y:"inherit"
+            y:"inherit",
           }}
           ref={ref}
-          onMouseUp={() => {
-            dispatch({
-              type: "SET_ACTIVE_TOOL",
-              payload: {
-                activeTool: "Shapes-Tools",
-                activePage: pageIndex,
-                activeElementType: "shapes",
-                activeElementIndex: index,
-              },
-            });
-          }}
+           onMouseEnter={focusHandeller} 
         ></div>
       </StyledRnd>
     </>

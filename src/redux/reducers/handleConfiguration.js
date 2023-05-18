@@ -7,7 +7,7 @@ const handleConfiguration = (state = initialState, action) => {
         console.log(action.payload,"00000");
             return action.payload;
             
-    default :    return state;
+    default : return state;
     }
 }
 

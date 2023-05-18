@@ -3,7 +3,7 @@ import React from "react";
 import FontSize from "../helper/FontSize";
 import ColorPalette from "./ShapeColorPalette";
 
-import { useDispatch } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { addShape } from "../../../../../../../../redux/actions/pageActions";
 import {
   octagonBorder,
@@ -17,6 +17,9 @@ import {
 } from "../../../Image/header/pic";
 const ShapesTools = () => {
   const dispatch = useDispatch();
+  const editor = useSelector((state) => state.projects.editor);
+  const data = useSelector((state) => state.projects.pages);
+  const val = useSelector((state)=>state.Zindex)
   return (
     <>
       {/* <div className="shape-tools Font-tools  flex">
@@ -62,6 +65,7 @@ const ShapesTools = () => {
                   x: "10px",
                   y: "10px",
                   background: "whitesmoke",
+                  zIndex:0
                 },
               })
             );
@@ -82,6 +86,7 @@ const ShapesTools = () => {
                   x: "10px",
                   y: "10px",
                   background: "whitesmoke",
+                  zIndex:0
                 },
               })
             );
@@ -103,6 +108,7 @@ const ShapesTools = () => {
                   x: "10px",
                   y: "10px",
                   background: "whitesmoke",
+                  zIndex:0
                 },
               })
             );
@@ -123,6 +129,7 @@ const ShapesTools = () => {
                   x: "10px",
                   y: "10px",
                   background: "whitesmoke",
+                  zIndex:0
                 },
               })
             );
@@ -164,6 +171,25 @@ const ShapesTools = () => {
             }}
           />
         </div> */}
+        <div className="ZindexBtns">
+        <button onClick={()=> dispatch({
+          type: "EDIT_SHAPE_ZINDEX",
+          payload: {
+            pageIndex: editor.activePage,
+            elementIndex: editor.activeElementIndex,
+            index:data[editor.activePage].shapes[editor.activeElementIndex].zIndex+1,
+          },
+        })}>increment</button>
+        <button onClick={()=> dispatch({
+          type: "EDIT_SHAPE_ZINDEX",
+          payload: {
+            pageIndex: editor.activePage,
+            elementIndex: editor.activeElementIndex,
+            index:data[editor.activePage].shapes[editor.activeElementIndex].zIndex-1
+          },
+        })}>Decrement</button>
+        <span> {data[editor.activePage].shapes[editor.activeElementIndex].zIndex} </span>
+      </div>
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { API } from '../../backend';
 
-
 // export const userInfo = (user) => async dispatch => {
 
 //     //console.log(user)

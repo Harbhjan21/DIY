@@ -28,7 +28,7 @@ const ColorPalette = ({
           width: "25px",
           borderRadius: "50%",
           margin: "0px 5px",
-          backgroundColor: { newColor },
+          backgroundColor: {newColor} ,
         }}
         onClick={() => {
           setShowColorBox(!showColorBox);

@@ -34,12 +34,12 @@ const Page = ({
 
   let pageIndex = data.currentPage;
   pageContent.current = data.pages;
-  console.log("pageIndex test", pageIndex);
+  // console.log("pageIndex test", pageIndex);
   let pageData = data.pages ? data.pages[pageIndex] : [];
   let page = !pagesHistory.page.length
     ? pageData
     : pagesHistory.page[pagesHistory.index - 1];
-  console.log("page", pagesHistory.page[pagesHistory.index - 1], pageData);
+  // console.log("page", pagesHistory.page[pagesHistory.index - 1], pageData);
   let color = data ? data.backgroundColor : "black";
 
   let height =
@@ -98,7 +98,7 @@ const Page = ({
   } else {
     h = 0.9 * frameHeight;
     w = (width * h) / height;
-    console.log(w, h);
+    // console.log(w, h);
     localStorage.setItem(
       "canvasDimension",
       JSON.stringify({ width: w, height: h })
@@ -162,27 +162,30 @@ const Page = ({
           }}
         >
           <div
+          
             onMouseDown={(event) => {
-              event.stopPropagation();
-              // let str = "Dimesion-Tools";
-              // setActiveTool(str);
-              // setActiveIndex(`${pageIndex}`);
-              // dispatch({
-              //   type: "SET_ACTIVE_TOOL",
-              //   payload: { activeTool: "Dimension-Tools" },
-              // });
-            }}
-            onClick={() => {
+              // console.log("my down movement occur");
+              // event.stopPropagation();
+              let str = "Dimesion-Tools";
+              setActiveTool(str);
+              setActiveIndex(`${pageIndex}`);
               dispatch({
                 type: "SET_ACTIVE_TOOL",
-                payload: {
-                  activeTool: "Shapes-Tools",
-                  activePage: data.currentPage,
-                  activeElementType: "page",
-                  activeElementIndex: 0,
-                },
+                payload: { activeTool: "Dimension-Tools" },
               });
             }}
+            // onClick={() => {
+            //   console.log("my click movement occur");
+            //   dispatch({
+            //     type: "SET_ACTIVE_TOOL",
+            //     payload: {
+            //       activeTool: "Shapes-Tools",
+            //       activePage: data.currentPage,
+            //       activeElementType: "page",
+            //       activeElementIndex: 0,
+            //     },
+            //   });
+            // }}
           >
             {/* {activeTool === "Dimesion-Tools" ? (
             <HeaderPage
@@ -195,12 +198,13 @@ const Page = ({
             />
           ) : null} */}
 
-            <Container ref={pageRef}>
+            <Container ref={pageRef} // this is canvas container
+            >
               {data.pages &&
                 page.logos &&
-                page.logos.map((ele, index) => {
+                page.logos.map((ele, index) => {  // mapping the logos to canvas
                   return (
-                    <ImageComponent
+                    <ImageComponent    
                       index={index}
                       ele={ele}
                       key={ele.index}
@@ -211,14 +215,17 @@ const Page = ({
                       ActiveIndex={ActiveIndex}
                       pageContent={pageContent}
                       pageIndex={pageIndex}
+                      onClick={() => {
+                          console.log("inside the logos container...");
+                      }}
                     />
                   );
                 })}
 
               {data.pages &&
-                page.shapes &&
-                data.pages[pageIndex].shapes.map((ele, index) => {
-                  return (
+                page.shapes &&                   
+                data.pages[pageIndex].shapes.map((ele, index) => {  // mapping the shapes to canvas
+                   return (
                     <StickerComponent
                       index={index}
                       element={ele}

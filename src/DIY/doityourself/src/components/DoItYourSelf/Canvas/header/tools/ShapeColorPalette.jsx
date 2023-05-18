@@ -15,7 +15,6 @@ const ColorPalette = ({
   const dispatch = useDispatch();
   const [newColor, setNewColor] = useState(currentColor);
   const [showColorBox, setShowColorBox] = useState(false);
-
   return (
     <div
       style={{
@@ -28,8 +27,8 @@ const ColorPalette = ({
           width: "25px",
           borderRadius: "50%",
           margin: "0px 5px",
-          backgroundColor:
-            data[editor.activePage].shapes[editor.activeElementIndex].background,
+          backgroundColor:data[editor.activePage].shapes?
+            data[editor.activePage].shapes[editor.activeElementIndex].background:"white", 
             border: "solid silver 1px"
         }}
         onClick={() => {

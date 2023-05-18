@@ -24,8 +24,6 @@ function AppDiy({ setIsAdmin }) {
   }
   return (
     <div className="App">
-   
-        
         {/* <CreateNew show={show}/> */}
          {!hideNavbar && <NavbarDiy />}
          <Home HideNavbar={HideNavbar} />

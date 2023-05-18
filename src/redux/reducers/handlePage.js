@@ -363,7 +363,13 @@ const handlePage = (state = initialState, action) => {
         action.payload.elementIndex
       ].background = action.payload.color;
       return state;
-
+     
+    case "EDIT_SHAPE_ZINDEX":
+      state[action.payload.pageIndex].shapes[
+        action.payload.elementIndex
+      ].zIndex = action.payload.index;
+      return state;
+     
     case "DELETE_PAGE":
       return (state.page = null);
 

@@ -102,10 +102,6 @@ const TextDisplayer = React.forwardRef(
         }
       };
 
-      //   const onClick = (e) => {
-      //     console.log("onClick");
-      //   };
-
       //   document.addEventListener("mousedown", onMouseDown);
       //   // document.addEventListener("mousemove", onMouseMove);
       document.addEventListener("mouseup", onMouseUp);
@@ -201,7 +197,7 @@ const TextComponent = React.forwardRef(
         setRefVal(ref);
       }
     }, [ref]);
-    function handleChange(event) {}
+    function handleChange(event) { console.log(event.target.value)}
 
     return (
       <div contenteditable="true">
@@ -233,3 +229,16 @@ const TextComponent = React.forwardRef(
   }
 );
 export default TextDisplayer;
+
+// onClick={() => {
+//   dispatch({
+//     type: "EDIT_TEXT",
+//     payload: {
+//       fontSize: item.fontSize,
+//       fontWeight: item.fontWeight,
+//       fontFamily: item.fontFamily,
+//       activePage: active.activePage,
+//       activeElement: active.activeElementIndex,
+//     },
+//   });
+// }}
