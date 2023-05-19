@@ -90,8 +90,6 @@ const OtherTools = () => {
                 type: "SET_CURRENT_PAGE",
                 payload: currentPage.length,
               });
-
-              console.log(1);
               dispatch({
                 type: "SET_ACTIVE_TOOL",
                 payload: {

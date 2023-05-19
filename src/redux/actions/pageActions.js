@@ -899,3 +899,38 @@ export const addShape = ({ shape }) => {
     });
   };
 };
+
+export const removeShape = ({ shape }) => {
+  return async (dispatch) => {
+    let data = store.getState();
+    let currentPage = data.projects.currentPage;
+    // console.log("current page ---> " , currentPage , "shapes---------->",data.projects.pages)
+    // const [shape , ...remaining] = data.projects.pages[currentPage-1].shapes;
+    // console.log("passed shape---> ", shape ,  "shape------> ",Shape ,"remaining------> ",remaining)
+    if (data.projects.pages[currentPage-1]?.shapes.length>1 ) {
+      const shapes = data.projects.pages[currentPage-1].shapes;
+      let remaining = [];
+      for(const index of shapes){
+        if(index !== shape)
+        remaining.push(index);
+      }
+      var page = {
+        ...data.projects.pages[currentPage],
+        shapes: remaining,
+      };
+    } else {
+      var page = {
+        ...data.projects.pages[currentPage],
+        shapes: [],
+      };
+    }
+    // console.log(page);
+    dispatch({
+      type: "CHANGE_TEMPLATE",
+      payload: {
+        pageUpdated: page,
+        pageIndex: currentPage,
+      },
+    });
+  };
+};

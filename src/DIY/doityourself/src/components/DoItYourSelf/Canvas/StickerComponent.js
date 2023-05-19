@@ -1,10 +1,16 @@
+import Icon from "./header/helper/Icon"; //"../../header/helper";
+import {deletePic} from "../Image/header/pic"; //'../../../../../doityourself/src/components/DoItYourSelf/Image/header/pic'; //'../../../../../Image/header/pic';
 import React, { useRef, useEffect,useState } from "react";
 import { Rnd } from "react-rnd";
 import HeaderPage from "./header/HeaderPage";
 import styled from "styled-components";
 import { useSelector,useDispatch } from "react-redux";
+import {removeShape} from '../../../../../../redux/actions/pageActions';
+import { hover } from "@testing-library/user-event/dist/hover";
 // import { Flag } from "@mui/icons-material";
-let flag=false;  // to change color and focus
+import CircleIcon from "@mui/icons-material/Circle";
+import { Delete } from "@mui/icons-material";
+let flag=false,isFocus=false;  // to change color and focus
 const StyledRnd = styled(Rnd)`
   &:hover {
     border: 1px solid blue;
@@ -24,11 +30,11 @@ export default function StickerComponent({
   pageIndex,
 }) {
   const dispatch = useDispatch();
-  const val = useSelector((state)=>state.Zindex);
+  const currentPage = useSelector((state) => state.projects.pages);
   useEffect(() => {
     console.log("shape-------------------- ", element);
   }, []);
-
+  
   let ref = useRef(null);
 
   function onResize(event, direction, ref, delta, indexs) {
@@ -77,6 +83,7 @@ export default function StickerComponent({
     return num;
   }
   const focusHandeller = ()=>{// object focus event to resolve color problem
+    setHover(true);
     if(flag){
       flag=false;
       dispatch({
@@ -90,6 +97,15 @@ export default function StickerComponent({
       });
     }
     }
+  const [isHover,setHover] = useState(false);
+
+  const deleteShape = {
+    cursor:'pointer',
+    visibility:isHover?"inherit":"collapse", 
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center'
+  }
   return (
     <>
       {/* {activeTool === "Shapes-Tools" && ActiveIndex == index ? (
@@ -138,7 +154,31 @@ export default function StickerComponent({
           }}
           ref={ref}
            onMouseEnter={focusHandeller} 
-        ></div>
+           onMouseLeave={()=> setHover(false)}
+        >
+       <div 
+        className="delete"
+         style={deleteShape}
+         onMouseDown={()=>{
+          dispatch({
+            type: "SET_CURRENT_PAGE",
+            payload: currentPage.length,
+          });
+          dispatch({
+            type: "SET_ACTIVE_TOOL",
+            payload: {
+              activeTool: "Dimension-Tools",
+              activePage: currentPage.length,
+              activeElementType: "page",
+              activeElementIndex: 0,
+            },
+          });
+          dispatch(removeShape({ shape: element }));
+         }} // used to delete shape object
+        >
+        <Delete/>
+         </div>
+        </div>
       </StyledRnd>
     </>
   );

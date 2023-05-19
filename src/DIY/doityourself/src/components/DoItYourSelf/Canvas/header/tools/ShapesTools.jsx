@@ -19,7 +19,6 @@ const ShapesTools = () => {
   const dispatch = useDispatch();
   const editor = useSelector((state) => state.projects.editor);
   const data = useSelector((state) => state.projects.pages);
-  const val = useSelector((state)=>state.Zindex)
   return (
     <>
       {/* <div className="shape-tools Font-tools  flex">
@@ -188,7 +187,7 @@ const ShapesTools = () => {
             index:data[editor.activePage].shapes[editor.activeElementIndex].zIndex-1
           },
         })}>Decrement</button>
-        <span> {data[editor.activePage].shapes[editor.activeElementIndex].zIndex} </span>
+        <span> {data[editor.activePage].shapes[editor.activeElementIndex].zIndex || 0 } </span>
       </div>
       </div>
     </>
