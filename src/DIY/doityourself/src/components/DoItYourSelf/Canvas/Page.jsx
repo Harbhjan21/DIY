@@ -41,6 +41,8 @@ const Page = ({
     : pagesHistory.page[pagesHistory.index - 1];
   // console.log("page", pagesHistory.page[pagesHistory.index - 1], pageData);
   let color = data ? data.backgroundColor : "black";
+  console.log("pageeeeeeeee", page);
+  console.log("pageindexxxxx", pageIndex);
 
   let height =
     data?.pages && data?.pages[pageIndex]?.shapeCanvas
@@ -162,16 +164,18 @@ const Page = ({
           }}
         >
           <div
-          
             onMouseDown={(event) => {
               // console.log("my down movement occur");
               // event.stopPropagation();
               let str = "Dimesion-Tools";
               setActiveTool(str);
-              setActiveIndex(`${pageIndex}`);
+              setActiveIndex(pageIndex);
               dispatch({
                 type: "SET_ACTIVE_TOOL",
-                payload: { activeTool: "Dimension-Tools" },
+                payload: {
+                  activeTool: "Dimension-Tools",
+                  activePage: ActiveIndex,
+                },
               });
             }}
             // onClick={() => {
@@ -198,16 +202,33 @@ const Page = ({
             />
           ) : null} */}
 
-            <Container ref={pageRef} // this is canvas container
+            <div
+              style={{
+                position: "relative",
+                height: `${h}px`,
+                width: `${w}px`,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 1,
+                backgroundColor: `${
+                  data?.pages && data.pages[pageIndex]?.backgroundColor
+                    ? data.pages[pageIndex].backgroundColor
+                    : "white"
+                }`,
+
+                overflow: "hidden",
+              }}
             >
               {data.pages &&
                 page.logos &&
-                page.logos.map((ele, index) => {  // mapping the logos to canvas
+                page.logos.map((ele, index) => {
+                  // mapping the logos to canvas
                   return (
-                    <ImageComponent    
+                    <ImageComponent
                       index={index}
                       ele={ele}
-                      key={ele.index}
+                      key={index}
                       activeTool={activeTool}
                       setActiveTool={setActiveTool}
                       toolsAvailable={toolsAvailable}
@@ -216,19 +237,21 @@ const Page = ({
                       pageContent={pageContent}
                       pageIndex={pageIndex}
                       onClick={() => {
-                          console.log("inside the logos container...");
+                        console.log("inside the logos container...");
                       }}
                     />
                   );
                 })}
 
               {data.pages &&
-                page.shapes &&                   
-                data.pages[pageIndex].shapes.map((ele, index) => {  // mapping the shapes to canvas
-                   return (
+                page.shapes &&
+                data.pages[pageIndex].shapes.map((ele, index) => {
+                  // mapping the shapes to canvas
+                  return (
                     <StickerComponent
                       index={index}
                       element={ele}
+                      key={index}
                       activeTool={activeTool}
                       setActiveTool={setActiveTool}
                       ActiveIndex={ActiveIndex}
@@ -245,6 +268,7 @@ const Page = ({
                   <UploadImg
                     index={index}
                     ele={ele}
+                    key={index}
                     activeTool={activeTool}
                     setActiveTool={setActiveTool}
                     ActiveIndex={ActiveIndex}
@@ -256,13 +280,14 @@ const Page = ({
 
               {page.texts &&
                 page.texts.map((ele, index) => {
+                  console.log(ele.text);
                   return (
                     <Text
                       setText={setText}
                       index={index}
                       ele={ele}
                       color={color}
-                      key={ele.text}
+                      key={index}
                       activeTool={activeTool}
                       setActiveTool={setActiveTool}
                       toolsAvailable={toolsAvailable}
@@ -275,7 +300,7 @@ const Page = ({
                     />
                   );
                 })}
-            </Container>
+            </div>
           </div>
         </div>
 

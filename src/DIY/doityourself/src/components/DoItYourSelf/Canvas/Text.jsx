@@ -2,6 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import ContentEditable from "react-contenteditable";
+import { Delete } from "@mui/icons-material";
+import {
+  removeText,
+  updateText,
+} from "../../../../../../redux/actions/pageActions";
 import {
   setText,
   updatePage,
@@ -36,8 +42,10 @@ const TextDisplayer = React.forwardRef(
   }) => {
     // console.log(activeTool,"SDsddddddddddddddd");
     const showHeader = useRef(false);
-    const TextObject = useRef(ele);
+
+    var TextObject = ele;
     let dispatch = useDispatch();
+    const currentPage = useSelector((state) => state.projects.pages);
     const [ref, setRefVal] = useState(null);
     useEffect(() => {
       // console.log(TextObject.current);
@@ -73,7 +81,7 @@ const TextDisplayer = React.forwardRef(
       let num = Number(a[0]);
       return num;
     }
-    React.useEffect(() => {
+    /*    React.useEffect(() => {
       //   const onMouseDown = (e) => {
       //     console.log("onMouseDown");
       //   };
@@ -113,6 +121,7 @@ const TextDisplayer = React.forwardRef(
         document.removeEventListener("mouseup", onMouseUp);
       };
     }, []);
+*/
     return (
       TextObject && (
         // <>{console.log(activeTool,ActiveIndex,index,"****************")}
@@ -135,6 +144,7 @@ const TextDisplayer = React.forwardRef(
             onDragStop={onDragStop}
             onMouseDown={(event) => {
               event.stopPropagation();
+
               // console.log(pageContent.current)
 
               // console.log(":hello mouse is down")
@@ -145,15 +155,17 @@ const TextDisplayer = React.forwardRef(
               setActiveIndex(`${index}`);
               // dispatch(updatePage({page:pageContent.current[pageIndex]}))
             }}
-            key={ele.id}
+            key={index}
           >
             <TextComponent
               setRefVal={setRefVal}
               TextObject={TextObject}
               index={index}
               pageIndex={pageIndex}
-              info={TextObject.current}
+              info={TextObject}
               backgroundColor={color}
+              ele={ele}
+              ref={ref}
             />
           </StyledRnd>
         </>
@@ -172,9 +184,15 @@ const TextComponent = React.forwardRef(
     selectedCol,
     TextObject,
     pageIndex,
+    ele,
+    ref,
   }) => {
-    const ref = useRef(null);
+    const text = ele.text;
+    console.log(text);
+    var textref = text;
+    console.log(textref);
     const dispatch = useDispatch();
+    const currentPage = useSelector((state) => state.projects.pages);
     let weight = info.isBold ? 900 : 500;
     let style = info.isItalic ? "italic" : "normal";
     let textdecoration = info.underline ? "underline" : "none";
@@ -191,26 +209,36 @@ const TextComponent = React.forwardRef(
       width${width};
       text-align: ${info.align || "right"};
     `;
+    const [isHover, setHover] = useState(false);
+    const deleteShape = {
+      cursor: "pointer",
+      // visibility: isHover ? "inherit" : "collapse",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
 
     useEffect(() => {
       if (!(ref === null)) {
         setRefVal(ref);
       }
     }, [ref]);
-    function handleChange(event) { console.log(event.target.value)}
+    const handleChange = (evt) => {
+      textref = evt.target.value;
+      dispatch(updateText({ Eindex: index, Utext: textref }));
+    };
+
+    /* const handleBlur = () => {
+      console.log(ref.current);
+      console.log("on blure");
+      dispatch(updateText({ Eindex: index, Utext: ref.current }));
+    };*/
 
     return (
-      <div contenteditable="true">
-        <TextField
-          onChange={(e) => handleChange(e)}
-          ref={ref}
-          // onClick={() =>
-          //   dispatch({
-          //     type: "SET_TEXTBOX",
-          //     payload: { pageIndex: pageIndex, textboxIndex: index },
-          //   })
-          // }
-          onMouseUp={() => {
+      <div>
+        <ContentEditable
+          onMouseDown={(e) => {
+            console.log("in dispatch of text");
             dispatch({
               type: "SET_ACTIVE_TOOL",
               payload: {
@@ -221,9 +249,34 @@ const TextComponent = React.forwardRef(
               },
             });
           }}
+          html={textref}
+          // onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <div
+          className="delete"
+          style={deleteShape}
+          onMouseDown={(e) => {
+            e.stopPropagation();
+
+            dispatch({
+              type: "SET_CURRENT_PAGE",
+              payload: currentPage.length,
+            });
+            dispatch({
+              type: "SET_ACTIVE_TOOL",
+              payload: {
+                activeTool: "Dimension-Tools",
+                activePage: currentPage.length,
+                activeElementType: "page",
+                activeElementIndex: 0,
+              },
+            });
+            dispatch(removeText({ Eindex: index }));
+          }} // used to delete shape object
         >
-          {info.text}
-        </TextField>
+          <Delete />
+        </div>
       </div>
     );
   }

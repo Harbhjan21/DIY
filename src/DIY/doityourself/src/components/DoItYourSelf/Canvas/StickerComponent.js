@@ -1,16 +1,17 @@
 import Icon from "./header/helper/Icon"; //"../../header/helper";
-import {deletePic} from "../Image/header/pic"; //'../../../../../doityourself/src/components/DoItYourSelf/Image/header/pic'; //'../../../../../Image/header/pic';
-import React, { useRef, useEffect,useState } from "react";
+import { deletePic } from "../Image/header/pic"; //'../../../../../doityourself/src/components/DoItYourSelf/Image/header/pic'; //'../../../../../Image/header/pic';
+import React, { useRef, useEffect, useState } from "react";
 import { Rnd } from "react-rnd";
 import HeaderPage from "./header/HeaderPage";
 import styled from "styled-components";
-import { useSelector,useDispatch } from "react-redux";
-import {removeShape} from '../../../../../../redux/actions/pageActions';
+import { useSelector, useDispatch } from "react-redux";
+import { removeShape } from "../../../../../../redux/actions/pageActions";
 import { hover } from "@testing-library/user-event/dist/hover";
 // import { Flag } from "@mui/icons-material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Delete } from "@mui/icons-material";
-let flag=false,isFocus=false;  // to change color and focus
+let flag = false,
+  isFocus = false; // to change color and focus
 const StyledRnd = styled(Rnd)`
   &:hover {
     border: 1px solid blue;
@@ -34,7 +35,7 @@ export default function StickerComponent({
   useEffect(() => {
     console.log("shape-------------------- ", element);
   }, []);
-  
+
   let ref = useRef(null);
 
   function onResize(event, direction, ref, delta, indexs) {
@@ -52,9 +53,9 @@ export default function StickerComponent({
     //pageContent.current[pageIndex].shapes[index].x = x;
     //pageContent.current[pageIndex].shapes[index].y = y;
   }
- 
+
   function onDragStop(e, d, indexs) {
-    flag=true;  
+    flag = true;
     const { x, y } = d;
     // console.log(d);
     // console.log(
@@ -66,11 +67,11 @@ export default function StickerComponent({
       payload: {
         x: x,
         y: y,
-        width: pageContent.current[pageIndex].shapes[index].width ,
-        height:pageContent.current[pageIndex].shapes[index].height,
+        width: pageContent.current[pageIndex].shapes[index].width,
+        height: pageContent.current[pageIndex].shapes[index].height,
       },
     });
-  
+
     pageContent.current[pageIndex].shapes[index].x = x;
     pageContent.current[pageIndex].shapes[index].y = y;
   }
@@ -82,10 +83,11 @@ export default function StickerComponent({
     let num = Number(a[0]);
     return num;
   }
-  const focusHandeller = ()=>{// object focus event to resolve color problem
+  const focusHandeller = () => {
+    // object focus event to resolve color problem
     setHover(true);
-    if(flag){
-      flag=false;
+    if (flag) {
+      flag = false;
       dispatch({
         type: "SET_ACTIVE_TOOL",
         payload: {
@@ -96,16 +98,16 @@ export default function StickerComponent({
         },
       });
     }
-    }
-  const [isHover,setHover] = useState(false);
+  };
+  const [isHover, setHover] = useState(false);
 
   const deleteShape = {
-    cursor:'pointer',
-    visibility:isHover?"inherit":"collapse", 
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center'
-  }
+    cursor: "pointer",
+    visibility: isHover ? "inherit" : "collapse",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
   return (
     <>
       {/* {activeTool === "Shapes-Tools" && ActiveIndex == index ? (
@@ -117,7 +119,7 @@ export default function StickerComponent({
         />
       ) : null} */}
       <StyledRnd
-        style={{zIndex:element.zIndex}}
+        style={{ zIndex: element.zIndex }}
         className="d-flex"
         default={{
           x: getNumber(element.x),
@@ -127,7 +129,7 @@ export default function StickerComponent({
         }}
         bounds="parent"
         onResize={onResize}
-       // onResizeStop={onResizeStop}
+        // onResizeStop={onResizeStop}
         onDragStop={onDragStop}
         onMouseDown={(event) => {
           event.stopPropagation();
@@ -149,35 +151,35 @@ export default function StickerComponent({
             clipPath: element.clipPath,
             height: "inherit",
             width: "inherit",
-            x:"inherit",
-            y:"inherit",
+            x: "inherit",
+            y: "inherit",
           }}
           ref={ref}
-           onMouseEnter={focusHandeller} 
-           onMouseLeave={()=> setHover(false)}
+          onMouseEnter={focusHandeller}
+          onMouseLeave={() => setHover(false)}
         >
-       <div 
-        className="delete"
-         style={deleteShape}
-         onMouseDown={()=>{
-          dispatch({
-            type: "SET_CURRENT_PAGE",
-            payload: currentPage.length,
-          });
-          dispatch({
-            type: "SET_ACTIVE_TOOL",
-            payload: {
-              activeTool: "Dimension-Tools",
-              activePage: currentPage.length,
-              activeElementType: "page",
-              activeElementIndex: 0,
-            },
-          });
-          dispatch(removeShape({ shape: element }));
-         }} // used to delete shape object
-        >
-        <Delete/>
-         </div>
+          <div
+            className="delete"
+            style={deleteShape}
+            onMouseDown={() => {
+              dispatch({
+                type: "SET_CURRENT_PAGE",
+                payload: currentPage.length,
+              });
+              dispatch({
+                type: "SET_ACTIVE_TOOL",
+                payload: {
+                  activeTool: "Dimension-Tools",
+                  activePage: currentPage.length,
+                  activeElementType: "page",
+                  activeElementIndex: 0,
+                },
+              });
+              dispatch(removeShape({ Eindex: index }));
+            }} // used to delete shape object
+          >
+            <Delete />
+          </div>
         </div>
       </StyledRnd>
     </>

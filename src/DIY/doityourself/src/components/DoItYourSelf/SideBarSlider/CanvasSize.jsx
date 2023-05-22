@@ -80,6 +80,7 @@ const CanvasSize = () => {
       );
     }
   }, [customDimension]);
+
   const handleOrientation = (item) => {
     if (item == "Portrait") {
       dispatch(
@@ -98,7 +99,8 @@ const CanvasSize = () => {
     }
   };
 
-  document.onclick = function (e) {
+  document.onClick = function (e) {
+    console.log(previousSelectedHeight, "previsionsdfljlj");
     if (e.target.id !== "inputHeight") {
       if (inputHeightUpdation)
         document.getElementById("selectHeight").selectedIndex = "0";
@@ -282,7 +284,7 @@ const CanvasSize = () => {
             <span className="canva-select-editable">
               <select
                 id="selectHeight"
-                onInput={(e) => {
+                onChange={(e) => {
                   setPreviousSelectedHeight(
                     document.getElementById("selectHeight").selectedIndex
                   );
@@ -296,9 +298,9 @@ const CanvasSize = () => {
                 {[
                   2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32,
                   34, 36, 38, 40, 42, 44, 46, 48,
-                ].map((item) => (
-                  <option value={item}>{item}</option>
-                ))}
+                ].map((item) => {
+                  <option value={item}>{item}</option>;
+                })}
               </select>
               <input
                 type="text"

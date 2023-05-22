@@ -24,6 +24,7 @@ const TextStyle = () => {
   console.log("first----------------------", active);
   const project = useSelector((state) => state.projects);
   const pageIndex = project.currentPage;
+  console.log("pageindex", pageIndex);
   const textStyles = [
     {
       fontSize: "48px",

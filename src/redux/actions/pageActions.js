@@ -307,7 +307,11 @@ import { API } from "../../backend";
 import { useState } from "react";
 
 const myuser = JSON.parse(window.localStorage.getItem("myuser"));
-const canvasDimension = JSON.parse(window.localStorage.getItem("canvasDimension")) ? JSON.parse(window.localStorage.getItem("canvasDimension")) : {width : 400 , height : 400};
+const canvasDimension = JSON.parse(
+  window.localStorage.getItem("canvasDimension")
+)
+  ? JSON.parse(window.localStorage.getItem("canvasDimension"))
+  : { width: 400, height: 400 };
 
 const Text = [
   {
@@ -320,8 +324,9 @@ const Text = [
     letterSpacing: "2px",
     lineSpacing: "5px",
     underline: false,
-    x: Number(Math.floor(Number(canvasDimension.width)/2)-100),
-    y: Number(Math.floor(Number(canvasDimension.height)/8)),
+    x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
+    y: Number(Math.floor(Number(canvasDimension.height) / 8)),
+    newText: "",
   },
   {
     id: 1902,
@@ -332,8 +337,8 @@ const Text = [
     letterSpacing: "2px",
     lineSpacing: "5px",
     underline: false,
-    x: Number(Math.floor(Number(canvasDimension.width)/2)-100),
-    y: Number(Math.floor(Number(canvasDimension.height)/6)),
+    x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
+    y: Number(Math.floor(Number(canvasDimension.height) / 6)),
   },
   {
     id: 1903,
@@ -344,8 +349,8 @@ const Text = [
     letterSpacing: "2px",
     lineSpacing: "5px",
     underline: false,
-    x: Number(Math.floor(Number(canvasDimension.width)/2)-100),
-    y: Number(Math.floor(Number(canvasDimension.height)/5)),
+    x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
+    y: Number(Math.floor(Number(canvasDimension.height) / 5)),
   },
   {
     id: 1904,
@@ -357,8 +362,8 @@ const Text = [
     letterSpacing: "2px",
     lineSpacing: "5px",
     underline: false,
-    x: Number(Math.floor(Number(canvasDimension.width)/2)-100),
-    y: Number(Math.floor(Number(canvasDimension.height)/4)),
+    x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
+    y: Number(Math.floor(Number(canvasDimension.height) / 4)),
   },
   {
     id: 1905,
@@ -370,8 +375,8 @@ const Text = [
     letterSpacing: "2px",
     lineSpacing: "5px",
     underline: false,
-    x: Number(Math.floor(Number(canvasDimension.width)/2)-100),
-    y: Number(Math.floor(Number(canvasDimension.height)/3)),
+    x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
+    y: Number(Math.floor(Number(canvasDimension.height) / 3)),
   },
   {
     id: 1906,
@@ -384,8 +389,8 @@ const Text = [
     letterSpacing: "2px",
     lineSpacing: "5px",
     underline: true,
-    x: Number(Math.floor(Number(canvasDimension.width)/2)-100),
-    y: Number(Math.floor(Number(canvasDimension.height)/2)),
+    x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
+    y: Number(Math.floor(Number(canvasDimension.height) / 2)),
   },
   {
     id: 1907,
@@ -398,8 +403,8 @@ const Text = [
     letterSpacing: "2px",
     lineSpacing: "5px",
     underline: true,
-    x: Number(Math.floor(Number(canvasDimension.width)/2)-100),
-    y: Number(Math.floor(Number(canvasDimension.height)/1.7)),
+    x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
+    y: Number(Math.floor(Number(canvasDimension.height) / 1.7)),
   },
   {
     id: 1908,
@@ -412,8 +417,8 @@ const Text = [
     letterSpacing: "2px",
     lineSpacing: "5px",
     underline: true,
-    x: Number(Math.floor(Number(canvasDimension.width)/2)-100),
-    y: Number(Math.floor(Number(canvasDimension.height)/1.4)),
+    x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
+    y: Number(Math.floor(Number(canvasDimension.height) / 1.4)),
   },
 ];
 
@@ -559,7 +564,7 @@ export const deletePage = () => {
     let obj = {
       pageId: pageId,
     };
-   console.log(pageId);
+    console.log(pageId);
     console.log(data, "data deletePage");
 
     const response = await fetch(`${API}diy/diydeletePage`, {
@@ -604,7 +609,7 @@ export const getPageFromTemplate = ({ templateId }) => {
       },
     });
     const data = await response.json();
-     console.log( "checking templates",data);
+    console.log("checking templates", data);
 
     if (data.status === 200) {
       let projectId = data.data.result[0]._id;
@@ -900,20 +905,22 @@ export const addShape = ({ shape }) => {
   };
 };
 
-export const removeShape = ({ shape }) => {
+export const removeShape = ({ Eindex }) => {
   return async (dispatch) => {
     let data = store.getState();
     let currentPage = data.projects.currentPage;
     // console.log("current page ---> " , currentPage , "shapes---------->",data.projects.pages)
     // const [shape , ...remaining] = data.projects.pages[currentPage-1].shapes;
     // console.log("passed shape---> ", shape ,  "shape------> ",Shape ,"remaining------> ",remaining)
-    if (data.projects.pages[currentPage-1]?.shapes.length>1 ) {
-      const shapes = data.projects.pages[currentPage-1].shapes;
+    if (data.projects.pages[currentPage - 1]?.shapes.length > 1) {
+      const shapes = data.projects.pages[currentPage - 1].shapes;
       let remaining = [];
-      for(const index of shapes){
-        if(index !== shape)
-        remaining.push(index);
-      }
+      /*  for (const index of shapes) {
+        if (index !== shape) remaining.push(index);
+      }*/
+      remaining = shapes.filter((item, index) => {
+        return index != Eindex;
+      });
       var page = {
         ...data.projects.pages[currentPage],
         shapes: remaining,
@@ -932,5 +939,91 @@ export const removeShape = ({ shape }) => {
         pageIndex: currentPage,
       },
     });
+  };
+};
+export const removeText = ({ Eindex }) => {
+  return async (dispatch) => {
+    let data = store.getState();
+    let currentPage = data.projects.currentPage;
+    // let Eindex = data.projects.editor.activeElementIndex;
+    console.log(
+      "currentpage in removetext",
+      currentPage,
+      "activeelementindex",
+      Eindex
+    );
+    // console.log("current page ---> " , currentPage , "shapes---------->",data.projects.pages)
+    // const [shape , ...remaining] = data.projects.pages[currentPage-1].shapes;
+    // console.log("passed shape---> ", shape ,  "shape------> ",Shape ,"remaining------> ",remaining)
+    if (data.projects.pages[currentPage - 1]?.texts.length > 1) {
+      console.log("in if");
+      const texts = data.projects.pages[currentPage - 1].texts;
+      let remaining = [];
+      /* for (const index of texts) {
+        if (index !== text) remaining.push(index);
+      }*/
+      remaining = texts.filter((item, index) => {
+        return index != Eindex;
+      });
+      var page = {
+        ...data.projects.pages[currentPage],
+        texts: remaining,
+      };
+    } else {
+      console.log("in else");
+      var page = {
+        ...data.projects.pages[currentPage],
+        texts: [],
+      };
+    }
+    console.log("afte remove", page);
+    dispatch({
+      type: "CHANGE_TEMPLATE",
+      payload: {
+        pageUpdated: page,
+        pageIndex: currentPage,
+      },
+    });
+  };
+};
+export const updateText = ({ Utext }) => {
+  return async (dispatch) => {
+    let data = store.getState();
+    let currentPage = data.projects.currentPage;
+    let Eindex = data.projects.editor.activeElementIndex;
+    console.log(
+      "currentpage in updatetext",
+      currentPage,
+      "activeelementindex",
+      Eindex
+    );
+    // console.log("current page ---> " , currentPage , "shapes---------->",data.projects.pages)
+    // const [shape , ...remaining] = data.projects.pages[currentPage-1].shapes;
+    // console.log("passed shape---> ", shape ,  "shape------> ",Shape ,"remaining------> ",remaining)
+
+    const texts = data.projects.pages[currentPage].texts;
+    if (texts) {
+      let remaining = [];
+      /* for (const index of texts) {
+        if (index !== text) remaining.push(index);
+      }*/
+      remaining = texts.map((ele, index) => {
+        if (index == Eindex) ele.newText = Utext;
+        return ele;
+      });
+      var page = {
+        ...data.projects.pages[currentPage],
+        texts: remaining,
+      };
+
+      console.log("afte updatef", page);
+      dispatch({
+        type: "CHANGE_TEMPLATE",
+        payload: {
+          pageUpdated: page,
+          pageIndex: currentPage,
+        },
+      });
+    }
   };
 };

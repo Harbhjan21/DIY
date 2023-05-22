@@ -87,7 +87,6 @@
 
 // =======================================================================================================
 
-
 const pageEmpty = [
   {
     template: null,
@@ -119,11 +118,11 @@ const handlePage = (state = initialState, action) => {
       return [...action.payload.page];
     case "CREATE_EMPTY_PAGE":
       return [...state, pageEmpty];
-  // switch (action.type) {
-  //   case "ADD_PAGE":
-  //     return [...action.payload.page];
-  //   case "CREATE_EMPTY_PAGE":
-  //     return [...state, pageEmpty];
+    // switch (action.type) {
+    //   case "ADD_PAGE":
+    //     return [...action.payload.page];
+    //   case "CREATE_EMPTY_PAGE":
+    //     return [...state, pageEmpty];
 
     case "EMPTY_PAGE":
       return state
@@ -195,12 +194,14 @@ const handlePage = (state = initialState, action) => {
       page = {
         ...state[action.payload.pageIndex][0],
         texts: [
-          ...(Array.isArray(state[action.payload.pageIndex].texts) ? state[action.payload.pageIndex].texts : []),
+          ...(Array.isArray(state[action.payload.pageIndex].texts)
+            ? state[action.payload.pageIndex].texts
+            : []),
           ...action.payload.text,
         ],
       };
       state[action.payload.pageIndex].texts = page.texts;
-    
+
       return state
         .slice(0, action.payload.pageIndex)
         .concat([page])
@@ -363,13 +364,13 @@ const handlePage = (state = initialState, action) => {
         action.payload.elementIndex
       ].background = action.payload.color;
       return state;
-     
+
     case "EDIT_SHAPE_ZINDEX":
       state[action.payload.pageIndex].shapes[
         action.payload.elementIndex
       ].zIndex = action.payload.index;
       return state;
-     
+
     case "DELETE_PAGE":
       return (state.page = null);
 
