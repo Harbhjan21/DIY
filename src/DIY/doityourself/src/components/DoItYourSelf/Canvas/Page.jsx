@@ -280,7 +280,7 @@ const Page = ({
 
               {page.texts &&
                 page.texts.map((ele, index) => {
-                  console.log(ele.text);
+                 // console.log("ele index", index, ele.text);
                   return (
                     <Text
                       setText={setText}

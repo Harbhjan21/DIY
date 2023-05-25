@@ -8,6 +8,7 @@ import ColorPalette from "../ColorPalette";
 import { FiAlignCenter } from "../icons";
 
 import { useSelector } from "react-redux";
+import TranslateText from "../helper/TranslateText";
 const FontTools = ({
   textColor,
   setTextColor,
@@ -37,6 +38,7 @@ const FontTools = ({
       className="Font-Tools flex"
       style={{ display: "flex", alignItems: "center" }}
     >
+      <TranslateText />
       <FontComponent finalFont={finalFont} setFinalFont={setFinalFont} />
       <FontWeight />
       <FontSize

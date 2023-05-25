@@ -190,9 +190,8 @@ const handlePage = (state = initialState, action) => {
         .concat(state.slice(action.payload.pageIndex + 1));
 
     case "GET_TEXTS":
-      // console.log(state);
       page = {
-        ...state[action.payload.pageIndex][0],
+        ...state[action.payload.pageIndex],
         texts: [
           ...(Array.isArray(state[action.payload.pageIndex].texts)
             ? state[action.payload.pageIndex].texts

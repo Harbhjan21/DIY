@@ -305,6 +305,7 @@ import store from "../store";
 import { API } from "../../backend";
 //import frames from "../../components/doityourself/src/components/DoItYourSelf/FakeData/data/framesShape";
 import { useState } from "react";
+import { text } from "../../DIY/doityourself/src/components/DoItYourSelf/Image/header/pic";
 
 const myuser = JSON.parse(window.localStorage.getItem("myuser"));
 const canvasDimension = JSON.parse(
@@ -339,6 +340,7 @@ const Text = [
     underline: false,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 6)),
+    newText: "",
   },
   {
     id: 1903,
@@ -351,6 +353,7 @@ const Text = [
     underline: false,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 5)),
+    newText: "",
   },
   {
     id: 1904,
@@ -364,6 +367,7 @@ const Text = [
     underline: false,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 4)),
+    newText: "",
   },
   {
     id: 1905,
@@ -377,6 +381,7 @@ const Text = [
     underline: false,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 3)),
+    newText: "",
   },
   {
     id: 1906,
@@ -391,6 +396,7 @@ const Text = [
     underline: true,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 2)),
+    newText: "",
   },
   {
     id: 1907,
@@ -405,6 +411,7 @@ const Text = [
     underline: true,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 1.7)),
+    newText: "",
   },
   {
     id: 1908,
@@ -419,6 +426,7 @@ const Text = [
     underline: true,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 1.4)),
+    newText: "",
   },
 ];
 
@@ -777,6 +785,7 @@ export const setText = ({ props, index, pageIndex }) => {
 };
 export const getText = ({ TextId, pageIndex }) => {
   return async (dispatch) => {
+    // console.log(Text);
     //await (async function (){
     let text = Text.filter((ele) => ele.id === TextId);
     console.log(text, "found any text");
@@ -922,12 +931,12 @@ export const removeShape = ({ Eindex }) => {
         return index != Eindex;
       });
       var page = {
-        ...data.projects.pages[currentPage],
+        ...data.projects.pages[currentPage - 1],
         shapes: remaining,
       };
     } else {
       var page = {
-        ...data.projects.pages[currentPage],
+        ...data.projects.pages[currentPage - 1],
         shapes: [],
       };
     }
@@ -952,6 +961,7 @@ export const removeText = ({ Eindex }) => {
       "activeelementindex",
       Eindex
     );
+
     // console.log("current page ---> " , currentPage , "shapes---------->",data.projects.pages)
     // const [shape , ...remaining] = data.projects.pages[currentPage-1].shapes;
     // console.log("passed shape---> ", shape ,  "shape------> ",Shape ,"remaining------> ",remaining)
@@ -966,13 +976,13 @@ export const removeText = ({ Eindex }) => {
         return index != Eindex;
       });
       var page = {
-        ...data.projects.pages[currentPage],
+        ...data.projects.pages[currentPage - 1],
         texts: remaining,
       };
     } else {
       console.log("in else");
       var page = {
-        ...data.projects.pages[currentPage],
+        ...data.projects.pages[currentPage - 1],
         texts: [],
       };
     }
@@ -1002,19 +1012,21 @@ export const updateText = ({ Utext }) => {
     // console.log("passed shape---> ", shape ,  "shape------> ",Shape ,"remaining------> ",remaining)
 
     const texts = data.projects.pages[currentPage].texts;
+    console.log(texts);
     if (texts) {
-      let remaining = [];
+      //let remaining = [];
+      var newtexts = [...texts];
       /* for (const index of texts) {
         if (index !== text) remaining.push(index);
       }*/
-      remaining = texts.map((ele, index) => {
-        if (index == Eindex) ele.newText = Utext;
-        return ele;
-      });
+      // newtexts[Eindex].text = Utext;
+      newtexts[Eindex].newText = Utext;
+      console.log(newtexts);
       var page = {
         ...data.projects.pages[currentPage],
-        texts: remaining,
+        texts: newtexts,
       };
+      // console.log("previous texts", texts);
 
       console.log("afte updatef", page);
       dispatch({
@@ -1024,6 +1036,56 @@ export const updateText = ({ Utext }) => {
           pageIndex: currentPage,
         },
       });
+    }
+  };
+};
+
+export const TranslateFont = ({ code }) => {
+  return async (dispatch) => {
+    console.log("in translatefont", code);
+    let data = store.getState();
+    let currentPage = data.projects.currentPage;
+    let Eindex = data.projects.editor.activeElementIndex;
+
+    const string = data.projects.pages[currentPage].texts[Eindex].newText;
+
+    var res = await fetch("http://localhost:3030/translate", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ q: string, language: code }),
+    });
+    res = await res.json();
+
+    if (!res.error) {
+      console.log(res);
+      const trans = res.translations.toString();
+
+      const texts = data.projects.pages[currentPage].texts;
+
+      if (texts) {
+        let newtext = [...texts];
+        newtext[Eindex].newText = trans;
+
+        var page = {
+          ...data.projects.pages[currentPage],
+          texts: newtext,
+        };
+
+        console.log("previous texts", texts);
+
+        console.log("afte updatef", page);
+        dispatch({
+          type: "CHANGE_TEMPLATE",
+          payload: {
+            pageUpdated: page,
+            pageIndex: currentPage,
+          },
+        });
+      }
+    } else {
+      console.log(res.error);
     }
   };
 };
