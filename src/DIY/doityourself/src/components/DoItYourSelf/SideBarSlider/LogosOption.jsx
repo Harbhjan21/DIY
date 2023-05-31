@@ -48,6 +48,7 @@ const LogosOption = () => {
                 <div
                   key={ele._id}
                   onClick={() => {
+                    console.log("logggggggg");
                     clickHandler(ele);
                   }}
                 >

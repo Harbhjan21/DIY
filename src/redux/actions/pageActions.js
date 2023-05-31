@@ -444,12 +444,13 @@ export const getTextTemplate = ({ text, pageIndex }) => {
 export const getLogo = ({ logo, pageIndex }) => {
   return async (dispatch) => {
     let data = store.getState();
+    dispatch({ type: "SET_LOGOS", payload: { logo, pageIndex } });
 
-    data.projects.pages[pageIndex].logos.push({ ...logo, rotate: 0 });
+    /* data.projects.pages[pageIndex].logos.push({ ...logo, rotate: 0 });
     let page = { ...data.projects.pages[pageIndex] };
-    // console.log(page);
+    console.log(page);
 
-    dispatch(updatePage({ page: page }));
+    dispatch(updatePage({ page: page }));*/
   };
 };
 export const updatePage = ({ page }) => {
@@ -1087,5 +1088,53 @@ export const TranslateFont = ({ code }) => {
     } else {
       console.log(res.error);
     }
+  };
+};
+
+export const Rotate_Img = ({ rotate }) => {
+  return (dispatch) => {
+    let data = store.getState();
+    let currentPage = data.projects.currentPage;
+    let Eindex = data.projects.editor.activeElementIndex;
+
+    if (data.projects.pages[currentPage].images) {
+      dispatch({
+        type: "ROTATE_IMG",
+        payload: { rotate: rotate, pageIndex: currentPage, Eindex: Eindex },
+      });
+    }
+  };
+};
+export const Delete_Img = ({ Eindex }) => {
+  return (dispatch) => {
+    let data = store.getState();
+    let currentPage = data.projects.currentPage;
+    // let Eindex = data.projects.editor.activeElementIndex;
+    if (data.projects.pages[currentPage - 1]?.images.length > 1) {
+      const images = data.projects.pages[currentPage - 1].images;
+      let remaining = [];
+      /* for (const index of texts) {
+        if (index !== text) remaining.push(index);
+      }*/
+      remaining = images.filter((item, index) => {
+        return index != Eindex;
+      });
+      var page = {
+        ...data.projects.pages[currentPage - 1],
+        images: remaining,
+      };
+    } else {
+      var page = {
+        ...data.projects.pages[currentPage - 1],
+        images: [],
+      };
+    }
+    dispatch({
+      type: "CHANGE_TEMPLATE",
+      payload: {
+        pageUpdated: page,
+        pageIndex: currentPage,
+      },
+    });
   };
 };

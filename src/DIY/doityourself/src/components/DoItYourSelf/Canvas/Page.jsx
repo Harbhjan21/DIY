@@ -130,9 +130,9 @@ const Page = ({
     shapes: "Shapes-Tools",
   };
 
-  data?.pages?.forEach((element) => {
+  /* data?.pages?.forEach((element) => {
     element?.logos?.reverse();
-  });
+  });*/
 
   const [activeTool, setActiveTool] = useState(toolsAvailable.canvas);
   const dispatch = useDispatch();
@@ -280,7 +280,7 @@ const Page = ({
 
               {page.texts &&
                 page.texts.map((ele, index) => {
-                 // console.log("ele index", index, ele.text);
+                  // console.log("ele index", index, ele.text);
                   return (
                     <Text
                       setText={setText}

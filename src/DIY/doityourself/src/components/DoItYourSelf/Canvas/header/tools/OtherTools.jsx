@@ -20,6 +20,7 @@ import {
 } from "../../../../../../../../redux/actions/pageActions";
 import { useDispatch, useSelector } from "react-redux";
 import HtmlTooltip from "../../../Commons/HtmlTooltip";
+import Download from "./Download";
 const OtherTools = () => {
   const dispatch = useDispatch();
 
@@ -125,7 +126,9 @@ const OtherTools = () => {
             />
           </div>
           <Icon img={position} desc="Position" />
-          <Icon img={download} desc="Download" />
+          <div onClick={() => console.log("first download")}>
+            <Download />
+          </div>
           <Icon img={share} desc="Share" />
         </div>
       </HtmlTooltip>
@@ -179,7 +182,9 @@ const OtherTools = () => {
           />
         </div>
         <Icon img={position} desc="Position" />
-        <Icon img={download} desc="Download" />
+        <div>
+          <Download />
+        </div>
         <Icon img={share} desc="Share" />
       </div>
     )

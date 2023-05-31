@@ -30,6 +30,7 @@ const FontTools = ({
   // underLine: false;
   // x: 220.00006103515625;
   // y: 100;
+  // <TranslateText />
 
   const data = useSelector((state) => state.projects.editor);
   console.log(data);
@@ -38,7 +39,6 @@ const FontTools = ({
       className="Font-Tools flex"
       style={{ display: "flex", alignItems: "center" }}
     >
-      <TranslateText />
       <FontComponent finalFont={finalFont} setFinalFont={setFinalFont} />
       <FontWeight />
       <FontSize
