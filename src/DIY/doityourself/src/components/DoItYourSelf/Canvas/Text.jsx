@@ -71,6 +71,7 @@ const TextDisplayer = React.forwardRef(
           y: y,
         },
       });
+      
       pageContent.current[pageIndex].texts[index].x = x;
       pageContent.current[pageIndex].texts[index].y = y;
     }

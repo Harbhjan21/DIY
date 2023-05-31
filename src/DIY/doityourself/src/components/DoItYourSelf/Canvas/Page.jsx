@@ -31,6 +31,7 @@ const Page = ({
   const data = useSelector((state) => {
     return state.projects;
   });
+  const Obj = useSelector((state)=>state);
 
   let pageIndex = data.currentPage;
   pageContent.current = data.pages;
@@ -39,7 +40,7 @@ const Page = ({
   let page = !pagesHistory.page.length
     ? pageData
     : pagesHistory.page[pagesHistory.index - 1];
-  // console.log("page", pagesHistory.page[pagesHistory.index - 1], pageData);
+  console.log("page", pagesHistory.page[pagesHistory.index - 1], pageData);
   let color = data ? data.backgroundColor : "black";
   console.log("pageeeeeeeee", page);
   console.log("pageindexxxxx", pageIndex);
@@ -82,6 +83,16 @@ const Page = ({
     //   w = (width * h) / height;
     //   console.log(w, h);
     // }
+    // console.log("HII From Page.js.......")
+    // console.log("My Data => ", Obj)
+    // console.log( "Before inserting Data => ", JSON.parse(localStorage.getItem('myData')));
+    if(Obj.projects.pages.length != 0){
+      Obj.projects.currentPage = Obj.projects.pages.length -1;
+      localStorage.setItem('myData', JSON.stringify(Obj));
+    }
+    else
+     console.log("Main nhi krne wala edit ....")
+    // console.log( "After Parsed Data => ", JSON.parse(localStorage.getItem('myData')));
   }, [page]);
 
   // const frameHeight = document.querySelector(
@@ -211,7 +222,7 @@ const Page = ({
                 justifyContent: "center",
                 alignItems: "center",
                 zIndex: 1,
-                backgroundColor: `${
+                backgroundColor: `${ // Canvas Color Problem issue 
                   data?.pages && data.pages[pageIndex]?.backgroundColor
                     ? data.pages[pageIndex].backgroundColor
                     : "white"

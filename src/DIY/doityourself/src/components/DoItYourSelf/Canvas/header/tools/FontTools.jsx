@@ -1,5 +1,5 @@
 import Icon from "../helper/Icon";
-import React from "react";
+import React, { useState } from "react";
 import { Paragraphstyle } from "../../../Image/header/pic";
 import FontSize from "../helper/FontSize";
 import FontWeight from "../helper/FontWeight";
@@ -7,7 +7,7 @@ import FontComponent from "../helper/FontFamily";
 import ColorPalette from "../ColorPalette";
 import { FiAlignCenter } from "../icons";
 
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 const FontTools = ({
   textColor,
   setTextColor,
@@ -30,7 +30,10 @@ const FontTools = ({
   // x: 220.00006103515625;
   // y: 100;
 
-  const data = useSelector((state) => state.projects.editor);
+  const editor = useSelector((state) => state.projects.editor);
+  const data = useSelector((state) => state.projects.pages);
+  const [Zindex,setZindex] = useState(data[editor.activePage].texts[editor.activeElementIndex].zIndex || 0 );
+  const dispatch = useDispatch();
   console.log(data);
   return (
     <div
@@ -92,6 +95,33 @@ const FontTools = ({
           <i class="fa-solid fa-align-right"></i>
         </div> 
       </div>*/}
+
+   {/* Managing Zindex of the Text */}
+     <button 
+     onClick={() => {
+      dispatch({
+        type: "EDIT_FONT_ZINDEX",
+        payload: {
+          pageIndex: editor.activePage,
+          elementIndex: editor.activeElementIndex,
+          ZINDEX:data[editor.activePage].texts[editor.activeElementIndex].zIndex+1,
+        },
+      });
+      setZindex(Zindex+1);
+    }}> Increment </button> 
+     <button 
+     onClick={() => {
+      dispatch({
+        type: "EDIT_FONT_ZINDEX",
+        payload: {
+          pageIndex: editor.activePage,
+          elementIndex: editor.activeElementIndex,
+          ZINDEX:data[editor.activePage].texts[editor.activeElementIndex].zIndex-1,
+        },
+      });
+      setZindex(Zindex-1);
+    }}> Decrement </button> 
+    <span>{data[editor.activePage].texts[editor.activeElementIndex].zIndex}</span>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import { getPageFromTemplate } from "../../../redux/actions/pageActions";
 import NavbarDiy from "./components/DoItYourSelf/Commons/Navbar";
@@ -16,7 +16,7 @@ function AppDiy({ setIsAdmin }) {
   function HideNavbar(){
     setHideNavbar(!hideNavbar)
   }
- 
+
   function loadPageData(templateId) {
     dispatch(getPageFromTemplate({ templateId: templateId }));
     loadPage(true);
@@ -27,7 +27,6 @@ function AppDiy({ setIsAdmin }) {
         {/* <CreateNew show={show}/> */}
          {!hideNavbar && <NavbarDiy />}
          <Home HideNavbar={HideNavbar} />
-     
     </div>
   );
 }
