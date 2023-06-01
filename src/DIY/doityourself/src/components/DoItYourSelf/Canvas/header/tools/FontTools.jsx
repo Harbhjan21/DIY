@@ -7,7 +7,10 @@ import FontComponent from "../helper/FontFamily";
 import ColorPalette from "../ColorPalette";
 import { FiAlignCenter } from "../icons";
 
+
 import { useSelector,useDispatch } from "react-redux";
+import TranslateText from "../helper/TranslateText";
+
 const FontTools = ({
   textColor,
   setTextColor,
@@ -29,6 +32,7 @@ const FontTools = ({
   // underLine: false;
   // x: 220.00006103515625;
   // y: 100;
+  // <TranslateText />
 
   const editor = useSelector((state) => state.projects.editor);
   const data = useSelector((state) => state.projects.pages);

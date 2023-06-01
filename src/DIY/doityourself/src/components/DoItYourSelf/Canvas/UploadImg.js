@@ -2,7 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Rnd } from "react-rnd";
+import { Rotatable } from "react-rotatable";
 import HeaderPage from "./header/HeaderPage";
+
+import ReactCrop from "react-image-crop";
+
 const StyledRnd = styled(Rnd)`
   &:hover {
     border: 1px solid blue;
@@ -13,7 +17,7 @@ const StyledRnd = styled(Rnd)`
 `;
 
 const ImageComp = React.forwardRef(
-  ({ img, setRefVal, index, pageIndex, ele }) => {
+  ({ img, setRefVal, index, pageIndex, ele, show, setShow }) => {
     const dispatch = useDispatch();
     let ref = useRef(null);
     const Image = styled.div`
@@ -23,20 +27,73 @@ const ImageComp = React.forwardRef(
       background-size: 100% 100%;
       transform: ${ele?.rotate ? `rotate(${ele.rotate}deg)` : "rotate(0deg)"};
     `;
+    // transform: ${({ rotationAngle }) => `rotate(${rotationAngle}deg)`};
     useEffect(() => {
       if (!(ref === null)) {
         setRefVal(ref);
       }
     }, [ref]);
+    //  const [isMouseDown, setIsMouseDown] = useState(false);
+    //  const [rotationAngle, setRotationAngle] = useState(0);
+    // const elementRef = useRef(null);
+
+    /*  useEffect(() => {
+      const handleMouseDown = (event) => {
+        setIsMouseDown(true);
+      };
+
+      const handleMouseUp = () => {
+        setIsMouseDown(false);
+        // setShow(false);
+      };
+
+      const handleMouseMove = (event) => {
+        if (isMouseDown) {
+          const element = elementRef.current;
+          // const element = document.getElementById("rotate");
+          const rect = element.getBoundingClientRect();
+
+          // Calculate the mouse position relative to the element's center
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const mouseX = event.clientX - centerX;
+          const mouseY = event.clientY - centerY;
+
+          // Calculate the angle of rotation
+          const angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
+
+          // Update the rotation angle and position in the state
+          setRotationAngle(angle);
+        }
+      };
+      if (show) {
+        const targetElement = document.getElementById("target-element");
+
+        targetElement.addEventListener("mousedown", handleMouseDown);
+        document.addEventListener("mouseup", handleMouseUp);
+        document.addEventListener("mousemove", handleMouseMove);
+
+        return () => {
+          targetElement.removeEventListener("mousedown", handleMouseDown);
+          document.removeEventListener("mouseup", handleMouseUp);
+          document.removeEventListener("mousemove", handleMouseMove);
+        };
+      }
+    }, [isMouseDown]);*/
 
     return (
       <Image
         ref={ref}
-        onMouseUp={() => {
-          dispatch({
+        //ref={elementRef}
+        //  rotationAngle={rotationAngle}
+        onMouseDown={(e) => {
+          /*  dispatch({
             type: "SET_ACTIVE_TOOL",
             payload: { activeTool: "Image-Tools" },
-          });
+          });*/
+          // e.stopPropagation();
+          // setShow(true);
+
           dispatch({
             type: "SET_ACTIVE_TOOL",
             payload: {
@@ -66,7 +123,7 @@ export default function UploadImg({
 }) {
   const dispatch = useDispatch();
   const [ref, setRefVal] = useState(null);
-  console.log(ele.file);
+
   let file = URL.createObjectURL(ele.file);
 
   function onResize(event, direction, ref, delta, indexs) {
@@ -84,8 +141,8 @@ export default function UploadImg({
       payload: {
         x: x,
         y: y,
-        width: pageContent.current[pageIndex].shapes[index].width ,
-        height:pageContent.current[pageIndex].shapes[index].height,
+        width: pageContent.current[pageIndex].images[index].width,
+        height: pageContent.current[pageIndex].images[index].height,
       },
     });
     pageContent.current[pageIndex].images[index].x = x;
@@ -99,6 +156,7 @@ export default function UploadImg({
     return num;
   }
 
+  //const [show, setShow] = useState(false);
   return (
     <>
       {/* {activeTool === "Image-Tools" && ActiveIndex == index ? (
@@ -106,6 +164,7 @@ export default function UploadImg({
       ) : null} */}
 
       <StyledRnd
+        id="rotate"
         className="d-flex"
         default={{
           x: getNumber(ele.x),
@@ -138,11 +197,28 @@ export default function UploadImg({
           index={index}
           pageIndex={pageIndex}
           ele={ele}
+          // show={show}
+          // setShow={setShow}
         />
         {/* <div>
           <img src={file}></img>
-        </div> */}
+      </div> */}
       </StyledRnd>
+      {/*show && (
+        <div
+          id="target-element"
+          style={{
+            marginTop: "30px",
+            // marginLeft: "100px",
+            background: "grey",
+            height: "20px",
+            width: "50px",
+            //  transform: `rotate(${degree}deg)`,
+          }}
+        >
+          rotate
+        </div>
+        )*/}
     </>
   );
 }

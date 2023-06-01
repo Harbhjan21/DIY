@@ -9,9 +9,19 @@ const UploadFile = ({ setOpenSlider }) => {
   const currentPage = data.currentPage;
   console.log(data);
   const dispatch = useDispatch();
-  const [file, setFile] = useState(null);
+  const [recent, setrecent] = useState();
+  const [src, setsrc] = useState(null);
+  const [files, setfiles] = useState(null);
+
   const handleChange = (file) => {
-    setFile(file);
+    setfiles(file[0]);
+    const url = URL.createObjectURL(file[0]);
+    setrecent(
+      recent
+        ? [...recent, { file: file[0], url: url }]
+        : [{ file: file[0], url: url }]
+    );
+    setsrc(url);
   };
   const dropHandler = (files, event) => {
     // console.log("onDrop!", files, event);
@@ -29,47 +39,49 @@ const UploadFile = ({ setOpenSlider }) => {
     //   </div>
     // </div>
     <div className="upload-sidebar" style={{ padding: "25px 15px" }}>
-      <h7>Upload files here</h7>
-      <input
-        type="file"
-        id="upload-sidebar-input"
-        style={{ display: "none" }}
-        onChange={(e) => {
-          // console.log(e.target.files);
-          dispatch({
-            type: "UPLOAD_IMG",
-            payload: { file: e.target.files[0], pageIndex: currentPage },
-          });
-        }}
-      ></input>
-      <label
-        htmlFor="upload-sidebar-input"
-        style={{
-          border: "solid white 1px",
-          fontSize: "small",
-          textAlign: "center",
-          padding: "7px 0px",
-          width: "100%",
-          margin: "10px 0px",
-          borderRadius: "2px",
-        }}
-      >
-        Select from device
-      </label>
-      <label
-        htmlFor="upload-sidebar-input"
-        style={{
-          border: "solid white 1px",
-          fontSize: "small",
-          textAlign: "center",
-          padding: "7px 0px",
-          width: "100%",
-          margin: "0px",
-          borderRadius: "2px",
-        }}
-      >
-        Upload from drive
-      </label>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <h7>Upload files here</h7>
+        <input
+          type="file"
+          id="upload-sidebar-input"
+          // style={{ display: "none" }}
+          onChange={(e) => {
+            handleChange(e.target.files);
+            /*  dispatch({
+              type: "UPLOAD_IMG",
+              payload: { file: e.target.files[0], pageIndex: currentPage },
+            });*/
+          }}
+        ></input>
+        <label
+          htmlFor="upload-sidebar-input"
+          style={{
+            border: "solid white 1px",
+            fontSize: "small",
+            textAlign: "center",
+            padding: "7px 0px",
+            width: "100%",
+            margin: "10px 0px",
+            borderRadius: "2px",
+          }}
+        >
+          Select from device
+        </label>
+        <label
+          htmlFor="upload-sidebar-input"
+          style={{
+            border: "solid white 1px",
+            fontSize: "small",
+            textAlign: "center",
+            padding: "7px 0px",
+            width: "100%",
+            margin: "0px",
+            borderRadius: "2px",
+          }}
+        >
+          Upload from drive
+        </label>
+      </div>
       <div
         style={{
           border: "solid white 1px",
@@ -78,17 +90,18 @@ const UploadFile = ({ setOpenSlider }) => {
           borderRadius: "2px",
         }}
       >
-        <FileDrop
-          onDrop={(files, e) =>
+        <div
+          onClick={() =>
             // dropHandler(files, event)
             dispatch({
               type: "UPLOAD_IMG",
-              payload: { file: files[0], pageIndex: currentPage },
+              payload: { file: files, pageIndex: currentPage },
             })
           }
         >
-          Drag & Drop Image here
-        </FileDrop>
+          {src && <img src={src} alt="loading..." width={160} height={220} />}
+          <lable>Click on Image to Add</lable>
+        </div>
       </div>
       <h7>Recent Uploads</h7>
       <div
@@ -97,17 +110,35 @@ const UploadFile = ({ setOpenSlider }) => {
           gridTemplateColumns: "1fr 1fr",
           gridColumnGap: "5px",
           gridRowGap: "7px",
+          marginTop: "10px",
         }}
       >
-        {["", "", "", ""].map((item) => (
-          <div
-            style={{
-              height: "90px",
-              width: "90px",
-              backgroundColor: "whitesmoke",
-            }}
-          ></div>
-        ))}
+        {recent &&
+          recent.map((item, index) => {
+            return (
+              <div
+                style={{
+                  height: "90px",
+                  width: "90px",
+                  backgroundColor: "whitesmoke",
+                }}
+                onClick={() => {
+                  dispatch({
+                    type: "UPLOAD_IMG",
+                    payload: { file: item.file, pageIndex: currentPage },
+                  });
+                }}
+              >
+                <img
+                  src={item.url}
+                  alt="..."
+                  key={index}
+                  height={90}
+                  width={90}
+                />
+              </div>
+            );
+          })}
       </div>
     </div>
   );

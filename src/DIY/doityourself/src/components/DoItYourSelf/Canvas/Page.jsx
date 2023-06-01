@@ -86,13 +86,14 @@ const Page = ({
     // console.log("HII From Page.js.......")
     // console.log("My Data => ", Obj)
     // console.log( "Before inserting Data => ", JSON.parse(localStorage.getItem('myData')));
-    if(Obj.projects.pages.length != 0){
+    if(Obj.projects.pages.length !== 0){
       Obj.projects.currentPage = Obj.projects.pages.length -1;
       localStorage.setItem('myData', JSON.stringify(Obj));
     }
     else
      console.log("Main nhi krne wala edit ....")
-    // console.log( "After Parsed Data => ", JSON.parse(localStorage.getItem('myData')));
+
+    console.log( "After Parsed Data => ", JSON.parse(localStorage.getItem('myData')));
   }, [page]);
 
   // const frameHeight = document.querySelector(
@@ -141,9 +142,9 @@ const Page = ({
     shapes: "Shapes-Tools",
   };
 
-  data?.pages?.forEach((element) => {
+  /* data?.pages?.forEach((element) => {
     element?.logos?.reverse();
-  });
+  });*/
 
   const [activeTool, setActiveTool] = useState(toolsAvailable.canvas);
   const dispatch = useDispatch();
@@ -291,7 +292,7 @@ const Page = ({
 
               {page.texts &&
                 page.texts.map((ele, index) => {
-                  console.log(ele.text);
+                  // console.log("ele index", index, ele.text);
                   return (
                     <Text
                       setText={setText}

@@ -10,10 +10,11 @@ function App() {
   console.log("Hii from App.js...");
   const dispatch = useDispatch();
   useEffect(()=>{
-    const data = JSON.parse(localStorage.getItem('myData'))
-    console.log("checking data => ",data);
+    if(1){
+      const data = JSON.parse(localStorage.getItem('myData'))
+      console.log("checking data => ",data);
       dispatch(Restore({ Data: data }));
-    
+    }
   },[]);
 
   return (

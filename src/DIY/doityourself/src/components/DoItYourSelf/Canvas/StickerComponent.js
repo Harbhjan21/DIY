@@ -134,7 +134,7 @@ export default function StickerComponent({
         // onResizeStop={onResizeStop}
         onDragStop={onDragStop}
         onMouseDown={(event) => {
-          event.stopPropagation();
+          // event.stopPropagation();
         }}
         // onClick={() => {
         //   let str = "Shapes-Tools";
@@ -164,6 +164,7 @@ export default function StickerComponent({
             className="delete"
             style={deleteShape}
             onMouseDown={() => {
+              console.log("dimensionsssss");
               dispatch({
                 type: "SET_CURRENT_PAGE",
                 payload: currentPage.length,

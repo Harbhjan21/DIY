@@ -182,7 +182,11 @@ const handlePage = (state = initialState, action) => {
     case "SET_LOGOS":
       page = {
         ...state[action.payload.pageIndex],
-        logos: action.payload.logo,
+        logos: [
+          ...(state[action.payload.pageIndex].logos
+            ? [...state[action.payload.pageIndex].logos, action.payload.logo]
+            : [action.payload.logo]),
+        ],
       };
       return state
         .slice(0, action.payload.pageIndex)
@@ -190,7 +194,6 @@ const handlePage = (state = initialState, action) => {
         .concat(state.slice(action.payload.pageIndex + 1));
 
     case "GET_TEXTS":
-      // console.log(state);
       page = {
         ...state[action.payload.pageIndex],
         texts: [
@@ -302,6 +305,7 @@ const handlePage = (state = initialState, action) => {
                 width: "100px",
                 x: "50px",
                 y: "50px",
+                rotate: 0,
               },
             ],
           })
@@ -314,6 +318,7 @@ const handlePage = (state = initialState, action) => {
                 width: "100px",
                 x: "50px",
                 y: "50px",
+                rotate: 0,
               },
             ],
           });
@@ -321,6 +326,11 @@ const handlePage = (state = initialState, action) => {
         .slice(0, action.payload.pageIndex)
         .concat(page)
         .concat(state.slice(action.payload.pageIndex + 1));
+
+    case "ROTATE_IMG":
+      state[action.payload.pageIndex].images[action.payload.Eindex].rotate =
+        action.payload.rotate;
+      return state;
 
     case "EDIT_FONT_BOLD":
       state[action.payload.pageIndex].texts[

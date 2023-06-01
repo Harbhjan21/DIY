@@ -91,7 +91,20 @@ const ImageComponent = React.forwardRef(
       let num = Number(a[0]);
       return num;
     }
-    console.log(ele);
+    const [imageSrc, setImageSrc] = useState("");
+
+    useEffect(() => {
+      const check = async () => {
+        await fetch(ele.logoURL)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const url = URL.createObjectURL(blob);
+            setImageSrc(url);
+          });
+        console.log(imageSrc);
+      };
+      check();
+    }, []);
     return (
       <>
         <StyledRnd
@@ -119,6 +132,7 @@ const ImageComponent = React.forwardRef(
             pageIndex={pageIndex}
             ele={ele}
           />
+          {imageSrc && <img src={imageSrc} alt="My Image" />}
         </StyledRnd>
       </>
     );

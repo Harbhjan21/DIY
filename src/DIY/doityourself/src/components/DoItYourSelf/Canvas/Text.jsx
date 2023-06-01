@@ -44,6 +44,7 @@ const TextDisplayer = React.forwardRef(
     const showHeader = useRef(false);
 
     var TextObject = ele;
+
     let dispatch = useDispatch();
     const currentPage = useSelector((state) => state.projects.pages);
     const [ref, setRefVal] = useState(null);
@@ -167,6 +168,7 @@ const TextDisplayer = React.forwardRef(
               backgroundColor={color}
               ele={ele}
               ref={ref}
+              key={index}
             />
           </StyledRnd>
         </>
@@ -188,9 +190,11 @@ const TextComponent = React.forwardRef(
     ele,
     ref,
   }) => {
-    const text = ele.text;
+    const text = ele.newText ? ele.newText : ele.text;
     console.log(text);
-    var textref = text;
+    // const [textref, settextref] = useState("");
+    // settextref(text);
+    const textref = text;
     console.log(textref);
     const dispatch = useDispatch();
     const currentPage = useSelector((state) => state.projects.pages);
@@ -225,8 +229,9 @@ const TextComponent = React.forwardRef(
       }
     }, [ref]);
     const handleChange = (evt) => {
-      textref = evt.target.value;
-      dispatch(updateText({ Eindex: index, Utext: textref }));
+      console.log("handle change");
+      //textref = evt.target.value;
+      dispatch(updateText({ Utext: evt.target.value }));
     };
 
     /* const handleBlur = () => {
