@@ -329,6 +329,7 @@ const handlePage = (state = initialState, action) => {
         .concat(state.slice(action.payload.pageIndex + 1));
 
     case "ROTATE_IMG":
+      console.log("in rotate_img", action.payload.rotate);
       state[action.payload.pageIndex].images[action.payload.Eindex].rotate =
         action.payload.rotate;
       return state;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRef } from "react";
 
@@ -21,7 +21,8 @@ const ImageTools = () => {
   const Page = useSelector((state) => state.projects.pages);
   let currentPage = data.currentPage;
   var Eindex = data.editor?.activeElementIndex;
-  var rotate = data.pages[currentPage].images[Eindex].rotate;
+  // var rotate = data.pages[currentPage].images[Eindex].rotate;
+  const [rotate, setrotate] = useState(0);
   degree.current = rotate;
 
   return (
@@ -51,8 +52,18 @@ const ImageTools = () => {
           <Delete />
         </div>
         <Icon img={crop} desc="Crop" left="-5px" />
-        <Icon img={rLeft} desc="Rotate Left" degree={degree} />
-        <Icon img={rRight} desc="Rotate Right" degree={degree} />
+        <Icon
+          img={rLeft}
+          desc="Rotate Left"
+          degree={degree}
+          setrotate={setrotate}
+        />
+        <Icon
+          img={rRight}
+          desc="Rotate Right"
+          degree={degree}
+          setrotate={setrotate}
+        />
       </div>
     </>
   );

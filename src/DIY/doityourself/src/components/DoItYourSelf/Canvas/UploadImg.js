@@ -6,6 +6,7 @@ import { IonIcon } from "@ionic/react";
 import { syncOutline } from "ionicons/icons";
 
 import ReactCrop from "react-image-crop";
+import { Rotate_Img } from "../../../../../../redux/actions/pageActions";
 
 const StyledRnd = styled(Rnd)`
   &:hover {
@@ -18,8 +19,10 @@ const StyledRnd = styled(Rnd)`
 
 const ImageComp = React.forwardRef(
   ({ img, setRefVal, index, pageIndex, ele, show, setShow }) => {
+    console.log(ele.rotate, "ele rotate");
     const dispatch = useDispatch();
     let ref = useRef(null);
+
     const Image = styled.div`
       width: 100%;
       height: 100%;
@@ -35,9 +38,12 @@ const ImageComp = React.forwardRef(
       }
     }, [ref]);
     const [isMouseDown, setIsMouseDown] = useState(false);
+
     const [rotationAngle, setRotationAngle] = useState(0);
     const [notshow, setnotshow] = useState(true);
     const elementRef = useRef(null);
+    const [angle, setangle] = useState(false);
+
     const handleMouseDown = (event) => {
       setIsMouseDown(true);
     };
@@ -45,11 +51,18 @@ const ImageComp = React.forwardRef(
     useEffect(() => {
       const handleMouseUp = () => {
         setIsMouseDown(false);
+
+        {
+          rotationAngle &&
+            dispatch(Rotate_Img({ rotate: Number(rotationAngle.toFixed(2)) }));
+        }
       };
+      if (ele.rotate != 0) {
+        setangle(true);
+      }
 
       const handleMouseMove = (event) => {
         if (isMouseDown) {
-          console.log("mousemoveeeeF");
           const element = elementRef.current;
           // const element = document.getElementById("rotate");
           const rect = element.getBoundingClientRect();
@@ -65,10 +78,10 @@ const ImageComp = React.forwardRef(
 
           // Update the rotation angle and position in the state
           setRotationAngle(angle);
+          // dispatch(Rotate_Img({ rotate: Number(angle.toFixed(2)) }));
         }
       };
       if (show) {
-        console.log("showwww");
         const targetElement = document.getElementById("target-element");
 
         // targetElement.addEventListener("mousedown", handleMouseDown);
@@ -81,7 +94,7 @@ const ImageComp = React.forwardRef(
           document.removeEventListener("mousemove", handleMouseMove);
         };
       }
-    }, [isMouseDown]);
+    }, [isMouseDown, ele.rotate, rotationAngle]);
 
     return (
       <>
@@ -91,7 +104,7 @@ const ImageComp = React.forwardRef(
             height: `100%`,
             backgroundImage: `url(${img})`,
             backgroundSize: `100% 100%`,
-            transform: `rotate(${rotationAngle}deg)`,
+            transform: `rotate(${angle ? ele.rotate : rotationAngle}deg)`,
           }}
           // ref={ref}
 
@@ -126,6 +139,8 @@ const ImageComp = React.forwardRef(
               e.stopPropagation();
               console.log("overrrrr");
               handleMouseDown();
+              setangle(false);
+              dispatch(Rotate_Img({ rotate: 0 }));
             }}
             style={{
               marginTop: "30px",
@@ -135,7 +150,6 @@ const ImageComp = React.forwardRef(
               //  transform: `rotate(${degree}deg)`,
             }}
             onBlur={() => {
-              console.log("bluree");
               setShow(false);
             }}
           >
@@ -186,7 +200,6 @@ export default function UploadImg({
     pageContent.current[pageIndex].images[index].y = y;
   }
   function getNumber(str) {
-    // console.log(str, "--", typeof str);
     let a = typeof str === "string" ? str.split("p") : str;
     if (typeof a === "number") return a;
     let num = Number(a[0]);

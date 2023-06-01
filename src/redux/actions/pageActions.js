@@ -1093,6 +1093,7 @@ export const TranslateFont = ({ code }) => {
 
 export const Rotate_Img = ({ rotate }) => {
   return (dispatch) => {
+    console.log("rotateeeeee", rotate);
     let data = store.getState();
     let currentPage = data.projects.currentPage;
     let Eindex = data.projects.editor.activeElementIndex;

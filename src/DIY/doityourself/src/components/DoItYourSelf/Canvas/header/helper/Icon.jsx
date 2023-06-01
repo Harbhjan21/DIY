@@ -3,15 +3,17 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Rotate_Img } from "../../../../../../../../redux/actions/pageActions";
 
-const Icon = ({ img, icon, desc, left, degree }) => {
+const Icon = ({ img, icon, desc, left, degree, setrotate }) => {
   const dispatch = useDispatch();
 
   const clickHandler = () => {
     if (desc == "Rotate Left") {
       degree.current = degree.current - 90;
+      setrotate(degree.current);
       dispatch(Rotate_Img({ rotate: degree.current }));
     } else if (desc == "Rotate Right") {
       degree.current = degree.current + 90;
+      setrotate(degree.current);
       dispatch(Rotate_Img({ rotate: degree.current }));
     }
   };
