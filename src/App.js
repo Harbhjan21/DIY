@@ -16,7 +16,6 @@ function App() {
       dispatch(Restore({ Data: data }));
     }
   },[]);
-
   return (
     <div>
       <AppDiy />
