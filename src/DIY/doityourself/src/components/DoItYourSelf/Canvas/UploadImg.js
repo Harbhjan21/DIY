@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Rnd } from "react-rnd";
-import { Rotatable } from "react-rotatable";
-import HeaderPage from "./header/HeaderPage";
+import { IonIcon } from "@ionic/react";
+import { syncOutline } from "ionicons/icons";
 
 import ReactCrop from "react-image-crop";
 
@@ -25,30 +25,31 @@ const ImageComp = React.forwardRef(
       height: 100%;
       background-image: url(${img});
       background-size: 100% 100%;
-      transform: ${ele?.rotate ? `rotate(${ele.rotate}deg)` : "rotate(0deg)"};
+      transform: ${({ rotationAngle }) => `rotate(${rotationAngle}deg)`};
     `;
     // transform: ${({ rotationAngle }) => `rotate(${rotationAngle}deg)`};
+    //transform: ${ele?.rotate ? `rotate(${ele.rotate}deg)` : "rotate(0deg)"};
     useEffect(() => {
       if (!(ref === null)) {
         setRefVal(ref);
       }
     }, [ref]);
-    //  const [isMouseDown, setIsMouseDown] = useState(false);
-    //  const [rotationAngle, setRotationAngle] = useState(0);
-    // const elementRef = useRef(null);
+    const [isMouseDown, setIsMouseDown] = useState(false);
+    const [rotationAngle, setRotationAngle] = useState(0);
+    const [notshow, setnotshow] = useState(true);
+    const elementRef = useRef(null);
+    const handleMouseDown = (event) => {
+      setIsMouseDown(true);
+    };
 
-    /*  useEffect(() => {
-      const handleMouseDown = (event) => {
-        setIsMouseDown(true);
-      };
-
+    useEffect(() => {
       const handleMouseUp = () => {
         setIsMouseDown(false);
-        // setShow(false);
       };
 
       const handleMouseMove = (event) => {
         if (isMouseDown) {
+          console.log("mousemoveeeeF");
           const element = elementRef.current;
           // const element = document.getElementById("rotate");
           const rect = element.getBoundingClientRect();
@@ -67,46 +68,81 @@ const ImageComp = React.forwardRef(
         }
       };
       if (show) {
+        console.log("showwww");
         const targetElement = document.getElementById("target-element");
 
-        targetElement.addEventListener("mousedown", handleMouseDown);
+        // targetElement.addEventListener("mousedown", handleMouseDown);
         document.addEventListener("mouseup", handleMouseUp);
         document.addEventListener("mousemove", handleMouseMove);
 
         return () => {
-          targetElement.removeEventListener("mousedown", handleMouseDown);
+          // targetElement.removeEventListener("mousedown", handleMouseDown);
           document.removeEventListener("mouseup", handleMouseUp);
           document.removeEventListener("mousemove", handleMouseMove);
         };
       }
-    }, [isMouseDown]);*/
+    }, [isMouseDown]);
 
     return (
-      <Image
-        ref={ref}
-        //ref={elementRef}
-        //  rotationAngle={rotationAngle}
-        onMouseDown={(e) => {
-          /*  dispatch({
+      <>
+        <div
+          style={{
+            width: `100%`,
+            height: `100%`,
+            backgroundImage: `url(${img})`,
+            backgroundSize: `100% 100%`,
+            transform: `rotate(${rotationAngle}deg)`,
+          }}
+          // ref={ref}
+
+          ref={elementRef}
+          //rotationAngle={rotationAngle}
+          onMouseDown={(e) => {
+            /*  dispatch({
             type: "SET_ACTIVE_TOOL",
             payload: { activeTool: "Image-Tools" },
           });*/
-          // e.stopPropagation();
-          // setShow(true);
+            // e.stopPropagation();
+            // setShow(true);
 
-          dispatch({
-            type: "SET_ACTIVE_TOOL",
-            payload: {
-              activeTool: "Image-Tools",
-              activePage: pageIndex,
-              activeElementType: "image",
-              activeElementIndex: index,
-            },
-          });
-        }}
-      >
-        {JSON.stringify}
-      </Image>
+            dispatch({
+              type: "SET_ACTIVE_TOOL",
+              payload: {
+                activeTool: "Image-Tools",
+                activePage: pageIndex,
+                activeElementType: "image",
+                activeElementIndex: index,
+              },
+            });
+          }}
+        >
+          {JSON.stringify}
+        </div>
+        {show && (
+          <div
+            tabIndex={0}
+            id="target-element"
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              console.log("overrrrr");
+              handleMouseDown();
+            }}
+            style={{
+              marginTop: "30px",
+
+              // marginLeft: "100px",
+
+              //  transform: `rotate(${degree}deg)`,
+            }}
+            onBlur={() => {
+              console.log("bluree");
+              setShow(false);
+            }}
+          >
+            <IonIcon icon={syncOutline} style={{ fontSize: "24px" }} />
+          </div>
+        )}
+      </>
     );
   }
 );
@@ -135,6 +171,7 @@ export default function UploadImg({
   }
 
   function onDragStop(e, d, indexs) {
+    // setShow(false);
     const { x, y } = d;
     dispatch({
       type: "SET_DIY_FORM_LOGO",
@@ -156,7 +193,7 @@ export default function UploadImg({
     return num;
   }
 
-  //const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   return (
     <>
       {/* {activeTool === "Image-Tools" && ActiveIndex == index ? (
@@ -164,7 +201,6 @@ export default function UploadImg({
       ) : null} */}
 
       <StyledRnd
-        id="rotate"
         className="d-flex"
         default={{
           x: getNumber(ele.x),
@@ -178,6 +214,7 @@ export default function UploadImg({
         onDragStop={onDragStop}
         onMouseDown={(event) => {
           event.stopPropagation();
+          setShow(true);
         }}
         // onClick={() => {
         //   // let str = "Image-Tools";
@@ -192,14 +229,16 @@ export default function UploadImg({
         key={ele._id}
       >
         <ImageComp
+          // tabIndex={0}
           img={file}
           setRefVal={setRefVal}
           index={index}
           pageIndex={pageIndex}
           ele={ele}
-          // show={show}
-          // setShow={setShow}
+          show={show}
+          setShow={setShow}
         />
+
         {/* <div>
           <img src={file}></img>
       </div> */}
