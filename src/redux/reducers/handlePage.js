@@ -215,7 +215,6 @@ const handlePage = (state = initialState, action) => {
         ...state[action.payload.pageIndex],
         texts: [...action.payload.textArr],
       };
-      // console.log(page, "#################################");
       console.log(page, "#################################");
       // return [...state]
       return state
@@ -368,6 +367,12 @@ const handlePage = (state = initialState, action) => {
       state[action.payload.pageIndex].texts[action.payload.elementIndex].color =
         action.payload.color;
       console.log(state);
+      return state;
+
+    case "EDIT_FONT_ZINDEX":
+      state[action.payload.pageIndex].texts[action.payload.elementIndex].zIndex =
+        action.payload.ZINDEX;
+      // console.log("inside Zindex of Texts ",state,"page index => ",action.payload.pageIndex ,"Element index => ",action.payload.elementIndex);
       return state;
 
     case "EDIT_SHAPE_BGCOLOR":

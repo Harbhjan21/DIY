@@ -10,8 +10,8 @@ import { hover } from "@testing-library/user-event/dist/hover";
 // import { Flag } from "@mui/icons-material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Delete } from "@mui/icons-material";
-let flag = false,
-  isFocus = false; // to change color and focus
+// let flag = false,
+ let isFocus = false; // to change color and focus
 const StyledRnd = styled(Rnd)`
   &:hover {
     border: 1px solid blue;
@@ -55,7 +55,8 @@ export default function StickerComponent({
   }
 
   function onDragStop(e, d, indexs) {
-    flag = true;
+    // flag = true;
+    // console.log("flag " , flag);
     const { x, y } = d;
     // console.log(d);
     // console.log(
@@ -86,8 +87,9 @@ export default function StickerComponent({
   const focusHandeller = () => {
     // object focus event to resolve color problem
     setHover(true);
-    if (flag) {
-      flag = false;
+    console.log(index);
+    // if (flag) {
+      // flag = false;
       dispatch({
         type: "SET_ACTIVE_TOOL",
         payload: {
@@ -97,7 +99,7 @@ export default function StickerComponent({
           activeElementIndex: index,
         },
       });
-    }
+    // }
   };
   const [isHover, setHover] = useState(false);
 
@@ -155,7 +157,7 @@ export default function StickerComponent({
             y: "inherit",
           }}
           ref={ref}
-          onMouseEnter={focusHandeller}
+          onClick={focusHandeller}
           onMouseLeave={() => setHover(false)}
         >
           <div
@@ -176,7 +178,7 @@ export default function StickerComponent({
                   activeElementIndex: 0,
                 },
               });
-              dispatch(removeShape({ Eindex: index }));
+              dispatch(removeShape({ Eindex:index}));
             }} // used to delete shape object
           >
             <Delete />

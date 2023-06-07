@@ -15,10 +15,12 @@ import {
   circle,
   triangle,
 } from "../../../Image/header/pic";
+import { useState } from "react";
 const ShapesTools = () => {
   const dispatch = useDispatch();
   const editor = useSelector((state) => state.projects.editor);
   const data = useSelector((state) => state.projects.pages);
+  const [Zindex,setZindex] = useState(data[editor.activePage].shapes[editor.activeElementIndex].zIndex || 0 );
   return (
     <>
       {/* <div className="shape-tools Font-tools  flex">
@@ -171,23 +173,27 @@ const ShapesTools = () => {
           />
         </div> */}
         <div className="ZindexBtns">
-        <button onClick={()=> dispatch({
+        <button onClick={()=> {dispatch({
           type: "EDIT_SHAPE_ZINDEX",
           payload: {
             pageIndex: editor.activePage,
             elementIndex: editor.activeElementIndex,
             index:data[editor.activePage].shapes[editor.activeElementIndex].zIndex+1,
           },
-        })}>increment</button>
-        <button onClick={()=> dispatch({
+        })
+        setZindex(Zindex+1);
+      }}>increment</button>
+        <button onClick={()=> {dispatch({
           type: "EDIT_SHAPE_ZINDEX",
           payload: {
             pageIndex: editor.activePage,
             elementIndex: editor.activeElementIndex,
             index:data[editor.activePage].shapes[editor.activeElementIndex].zIndex-1
           },
-        })}>Decrement</button>
-        <span> {data[editor.activePage].shapes[editor.activeElementIndex].zIndex || 0 } </span>
+        })
+        setZindex(Zindex-1);
+      }}>Decrement</button>
+        <span> {data[editor.activePage].shapes[editor.activeElementIndex].zIndex } </span>
       </div>
       </div>
     </>

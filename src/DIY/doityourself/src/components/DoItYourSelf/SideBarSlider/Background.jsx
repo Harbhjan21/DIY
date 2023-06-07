@@ -26,12 +26,13 @@ const colorArr = [
 ];
 
 const Background = () => {
+  const Obj = useSelector((state)=>state)
   const data = useSelector((state) => state.projects.pages);
   const dispatch = useDispatch();
   const project = useSelector((state) => state.projects);
   const pageIndex = project.currentPage;
 
-  const [color, setColor] = useState("white");
+  const [color, setColor] = useState(data[pageIndex].backgroundColor || "white");
   const hello = (e) => {
     setColor(e.target.style.background);
     // console.log(data[pageIndex].backgroundColor, "useselector");
@@ -40,6 +41,7 @@ const Background = () => {
     dispatch(
       setTemplateColor({ backgroundColor: color, pageIndex: pageIndex })
     );
+    localStorage.setItem("myData",JSON.stringify(Obj));
   }, [color]);
   const [openColor, setOpenColor] = useState(false);
   return (

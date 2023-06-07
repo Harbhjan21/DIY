@@ -14,6 +14,7 @@ import { useEffect } from "react";
 const TextStyle = () => {
   const data = useSelector((state) => state);
   console.warn(data);
+  localStorage.setItem('myData',  JSON.stringify(data));
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllTextStyle());

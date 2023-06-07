@@ -328,6 +328,7 @@ const Text = [
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 8)),
     newText: "",
+    zIndex:0
   },
   {
     id: 1902,
@@ -340,6 +341,7 @@ const Text = [
     underline: false,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 6)),
+    zIndex:0,
     newText: "",
   },
   {
@@ -353,6 +355,7 @@ const Text = [
     underline: false,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 5)),
+    zIndex:0,
     newText: "",
   },
   {
@@ -367,6 +370,7 @@ const Text = [
     underline: false,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 4)),
+    zIndex:0,
     newText: "",
   },
   {
@@ -381,6 +385,7 @@ const Text = [
     underline: false,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 3)),
+    zIndex:0,
     newText: "",
   },
   {
@@ -396,6 +401,7 @@ const Text = [
     underline: true,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 2)),
+    zIndex:0,
     newText: "",
   },
   {
@@ -411,6 +417,7 @@ const Text = [
     underline: true,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 1.7)),
+    zIndex:0,
     newText: "",
   },
   {
@@ -426,9 +433,53 @@ const Text = [
     underline: true,
     x: Number(Math.floor(Number(canvasDimension.width) / 2) - 100),
     y: Number(Math.floor(Number(canvasDimension.height) / 1.4)),
+    zIndex:0,
     newText: "",
   },
 ];
+
+export const Restore = ({ Data }) => {
+  return async (dispatch) => {
+    let currentPage = Data.projects.currentPage;
+      let page = {
+        ...Data.projects.pages[currentPage],
+      };
+      console.log("Restoring all Data ==> ",page);
+      dispatch({
+        type: "CHANGE_TEMPLATE",
+        payload: {
+          pageUpdated: page,
+          pageIndex: currentPage,
+        },
+      });
+    };
+  };
+
+  // export const Cloneing = ({ Data }) => {
+  //   return async (dispatch) => {
+  //     // let data = store.getState();
+  //     let currentPage = Data.projects.currentPage;
+  //     // if (data.projects.pages[currentPage]?.shapes) {
+  //       // var page = {
+  //       //   ...data.projects.pages[currentPage],
+  //       //   shapes: [...data.projects.pages[currentPage].shapes, shape],
+  //       // };
+  //     // } else {
+  //       var page = {
+  //         ...Data.projects.pages[currentPage],
+  //         // shapes: [shape],
+  //       };
+  //     // }
+  //     console.log("this cloned page help me ===>  ",page);
+  //     dispatch({
+  //       type: "CHANGE_TEMPLATE",
+  //       payload: {
+  //         pageUpdated: page,
+  //         pageIndex: currentPage,
+  //       },
+  //     });
+  //   };
+  // };
 
 export const getTextTemplate = ({ text, pageIndex }) => {
   return async (dispatch) => {
@@ -668,6 +719,7 @@ export const changeTemplate = ({ template, pageIndex }) => {
     }
   };
 };
+
 export const setFrame = ({ frameNumber }) => {
   return async (dispatch) => {
     let data = store.getState();
@@ -681,6 +733,7 @@ export const setFrame = ({ frameNumber }) => {
     });
   };
 };
+
 export const addNewCopyOfPage = ({ templateId }) => {
   // return async (dispatch, getState) =>{
   //     let data= store.getState();
@@ -724,6 +777,7 @@ export const getTemplate = ({ templateId, pageIndex }) => {
   // });
   // }
 };
+
 export const setTemplateColor = ({ backgroundColor, pageIndex }) => {
   if (pageIndex === undefined) {
     pageIndex = 0;
@@ -755,6 +809,7 @@ export const setLogo = ({ propObject, index, pageIndex }) => {
   //     })
   // }
 };
+
 export const getSvgs = ({ SvgId, pageIndex }) => {
   // return async dispatch =>{
   //    // await (async function (){
@@ -784,6 +839,7 @@ export const setText = ({ props, index, pageIndex }) => {
   //     })
   // }
 };
+
 export const getText = ({ TextId, pageIndex }) => {
   return async (dispatch) => {
     // console.log(Text);
@@ -893,7 +949,7 @@ export const addShape = ({ shape }) => {
   return async (dispatch) => {
     let data = store.getState();
     let currentPage = data.projects.currentPage;
-    if (data.projects.pages[currentPage]?.shapes) {
+    if (data.projects.pages[currentPage]?.shapes.length>=1) {
       var page = {
         ...data.projects.pages[currentPage],
         shapes: [...data.projects.pages[currentPage].shapes, shape],
@@ -924,20 +980,15 @@ export const removeShape = ({ Eindex }) => {
     // console.log("passed shape---> ", shape ,  "shape------> ",Shape ,"remaining------> ",remaining)
     if (data.projects.pages[currentPage - 1]?.shapes.length > 1) {
       const shapes = data.projects.pages[currentPage - 1].shapes;
-      let remaining = [];
-      /*  for (const index of shapes) {
-        if (index !== shape) remaining.push(index);
-      }*/
-      remaining = shapes.filter((item, index) => {
-        return index != Eindex;
-      });
+
+      shapes.splice(Eindex,1);
       var page = {
-        ...data.projects.pages[currentPage - 1],
-        shapes: remaining,
+        ...data.projects.pages[currentPage-1],
+        shapes: shapes,
       };
     } else {
       var page = {
-        ...data.projects.pages[currentPage - 1],
+        ...data.projects.pages[currentPage-1],
         shapes: [],
       };
     }
@@ -951,6 +1002,7 @@ export const removeShape = ({ Eindex }) => {
     });
   };
 };
+
 export const removeText = ({ Eindex }) => {
   return async (dispatch) => {
     let data = store.getState();
@@ -977,13 +1029,13 @@ export const removeText = ({ Eindex }) => {
         return index != Eindex;
       });
       var page = {
-        ...data.projects.pages[currentPage - 1],
+        ...data.projects.pages[currentPage],
         texts: remaining,
       };
     } else {
       console.log("in else");
       var page = {
-        ...data.projects.pages[currentPage - 1],
+        ...data.projects.pages[currentPage],
         texts: [],
       };
     }
@@ -997,6 +1049,7 @@ export const removeText = ({ Eindex }) => {
     });
   };
 };
+
 export const updateText = ({ Utext }) => {
   return async (dispatch) => {
     let data = store.getState();
